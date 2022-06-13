@@ -1,0 +1,115 @@
+---
+name: CI (Lint + Molecule)
+permissions: read-all
+"on":
+  workflow_dispatch:
+    inputs:
+      lint:
+        description: "Lint"
+        required: true
+        default: true
+        type: boolean
+  pull_request:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/ci.yml"
+      - "defaults/*"
+      - "handlers/*"
+      - "meta/**"
+      - "molecule/**"
+      - "tasks/*"
+      - "vars/*"
+      - ".ansible-lint"
+      - ".gitattributes"
+      - ".yamllint"
+      - "pyproject.toml"
+      - "requirements.yml"
+      - "tox.ini"
+  schedule:
+    # At 05:00 on Sunday.
+    - cron: "0 5 * * 0"
+
+jobs:
+  lint:
+    name: Lint
+    if: ${{ github.event.inputs.lint != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out the codebase
+        uses: actions/checkout@v3
+
+      - name: set up python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Install yamllint package.
+        run: pip3 install "yamllint==1.*"
+
+      - name: Lint YAML (GitHub Annotations)
+        run: |
+          cat <<HEREDOC
+          Wondering about why there are no file names?
+          This command outputs information parsed by GitHub
+          to be displayed in 'Annotations' tab.
+          HEREDOC
+          yamllint . -f github
+
+      - name: Lint YAML (Standard Output)
+        if: always()
+        run: yamllint . -f standard
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - centos7
+          - centos8
+          - debian10
+          - debian11
+          - fedora35
+          - rockylinux8
+          - ubuntu1604
+          - ubuntu1804
+          - ubuntu2004
+
+    steps:
+      - name: check out the codebase
+        uses: actions/checkout@v3
+
+      - name: set up python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: setup/activate pre-commit cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ hashFiles('**/.pre-commit-config.yaml') }}
+
+      - name: Install test dependencies.
+        run: pip3 install tox~=3.24.5
+
+      - name: Run Molecule tests (normal).
+        run: tox
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          TOX_PARALLEL_NO_SPINNER: 1
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+
+      - name: Run Molecule tests (debug).
+        run: tox
+        env:
+          MOLECULE_DESTROY: never
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          TOX_PARALLEL_NO_SPINNER: 1
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+
+      - name: setup tmate session if previous step failed and if this is a manual run
+        if: ${{ failure() && github.event_name == 'workflow_dispatch' }}
+        uses: mxschmitt/action-tmate@v3

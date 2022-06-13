@@ -1,0 +1,7 @@
+---
+# tasks file of ansible-role jonaspammer.openssl
+
+- name: check if all variables have been set correctly
+  ansible.builtin.import_tasks: assert.yml
+  run_once: true
+  delegate_to: localhost

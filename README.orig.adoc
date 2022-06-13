@@ -1,0 +1,170 @@
+= ansible-role-openssl
+Jonas Pammer <opensource@jonaspammer.at>;
+:toc:
+:toclevels: 2
+:toc-placement!:
+:source-highlighter: rouge
+
+ifdef::env-github[]
+// https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74#admonitions
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+// Very Relevant Status Badges
+https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml/badge.svg[Testing CI]]
+
+
+An Ansible role for generating OpenSSL Certificate Files.
+
+
+toc::[]
+
+[[meta]]
+== 🔎 Metadata
+Below you can find information on…
+
+* the role's required Ansible version
+* the role's supported platforms
+* the role's https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-dependencies[role dependencies]
+
+.link:meta/main.yml[]
+[source,yaml]
+----
+include::meta/main.yml[]
+----
+
+
+[[requirements]]
+== 📌 Requirements
+// Any prerequisites that may not be covered by this role or Ansible itself should be mentioned here.
+The Ansible User needs to be able to `become`.
+
+
+The https://galaxy.ansible.com/community/general[`community.general` collection]
+must be installed on the Ansible controller.
+
+
+[[variables]]
+== 📜 Role Variables
+// A description of the settable variables for this role should go here
+// and any variables that can/should be set via parameters to the role.
+// Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.)
+// should be mentioned here as well.
+
+[source,yaml]
+----
+variable: default value
+----
+Description
+
+
+[source,yaml]
+----
+variable: [OS-specific by default, see /vars directory]
+----
+Description
+
+
+[source,yaml]
+----
+variable: [OS-specific by default, see /vars directory]
+----
+(Debian/Ubuntu only)
+Description
+
+
+[[public_vars]]
+== 📜 Facts/Variables defined by this role
+
+Each variable listed in this section
+is dynamically defined when executing this role (and can only be overwritten using `ansible.builtin.set_facts`) _and_
+is meant to be used not just internally.
+
+
+[[dependencies]]
+== 👫 Dependencies
+// A list of other roles should go here,
+// plus any details in regard to parameters that may need to be set for other roles,
+// or variables that are used from other roles.
+
+
+
+[[example_playbooks]]
+== 📚 Example Playbook Usages
+// Including examples of how to use this role in a playbook for common scenarios is always nice for users.
+
+[NOTE]
+====
+This role is part of https://github.com/JonasPammer/ansible-roles[
+many compatible purpose-specific roles of mine].
+
+The machine needs to be prepared.
+In CI, this is done in `molecule/resources/prepare.yml`
+which sources its soft dependencies from `requirements.yml`:
+
+.link:molecule/resources/prepare.yml[]
+[source,yaml]
+----
+include::molecule/resources/prepare.yml[]
+----
+
+The following diagram is a compilation of the "soft dependencies" of this role
+as well as the recursive tree of their soft dependencies.
+
+image:https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/dependencies_openssl.svg[
+requirements.yml dependency graph of jonaspammer.openssl]
+====
+
+.Minimum Viable Play
+====
+[source,yaml]
+----
+roles:
+  - "jonaspammer.openssl"
+
+vars:
+  some_var: "some_value"
+----
+====
+
+
+[[development]]
+== 📝 Development
+// Badges about Conventions in this Project
+https://conventionalcommits.org[image:https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg[Conventional Commits]]
+https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-openssl/master[image:https://results.pre-commit.ci/badge/github/JonasPammer/ansible-role-openssl/master.svg[pre-commit.ci status]]
+// image:https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white[pre-commit, link=https://github.com/pre-commit/pre-commit]
+
+include::DEVELOPMENT.adoc[]
+
+
+[[contributing]]
+== 💪 Contributing
+image:https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square[PRs Welcome]
+https://open.vscode.dev/JonasPammer/ansible-role-openssl[image:https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc[Open in Visual Studio Code]]
+
+include::CONTRIBUTING.adoc[]
+
+
+[[changelog]]
+== 🗒 Changelog
+Please refer to the
+https://github.com/JonasPammer/ansible-role-openssl/releases[Release Page of this Repository]
+for a human changelog of the corresponding
+https://github.com/JonasPammer/ansible-role-openssl/tags[Tags (Versions) of this Project].
+
+Note that this Project adheres to Semantic Versioning.
+Please report any accidental breaking changes of a minor version update.
+
+
+[[license]]
+== ⚖️ License
+
+.link:LICENSE[]
+----
+include::LICENSE[]
+----

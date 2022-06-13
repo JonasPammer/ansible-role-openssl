@@ -1,0 +1,76 @@
+// Included in README.adoc
+:toc:
+:toclevels: 3
+
+The following sections are generic in nature and are used to help new contributors.
+The actual "Development Documentation" of this project is found under <<development>>.
+
+=== 🤝 Preamble
+First off, thank you for considering contributing to this Project.
+
+Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project.
+In return, they should reciprocate that respect in addressing your issue, assessing changes, and helping you finalize your pull requests.
+
+[[cookiecutter--contributing]]
+=== 🍪 CookieCutter
+This Project owns many of its files to
+https://github.com/JonasPammer/cookiecutter-ansible-role[the CookieCutter it was originally templated from].
+
+Please check if the edit you have in mind is actually applicable to the template
+and if so make an appropriate change there instead.
+Your change may also be applicable partly to the template
+as well as partly to something specific to this project,
+in which case you would be creating multiple PRs.
+
+=== 💬 Conventional Commits
+
+A casual contributor does not have to worry about following
+https://github.com/JonasPammer/JonasPammer/blob/master/demystifying/conventional_commits.adoc[__the spec__]
+https://www.conventionalcommits.org/en/v1.0.0/[__by definition__],
+as pull requests are being squash merged into one commit in the project.
+Only core contributors, i.e. those with rights to push to this project's branches, must follow it
+(e.g. to allow for automatic version determination and changelog generation to work).
+
+=== 🚀 Getting Started
+
+Contributions are made to this repo via Issues and Pull Requests (PRs).
+A few general guidelines that cover both:
+
+* Search for existing Issues and PRs before creating your own.
+* If you've never contributed before, see https://auth0.com/blog/a-first-timers-guide-to-an-open-source-project/[
+  the first timer's guide on Auth0's blog] for resources and tips on how to get started.
+
+==== Issues
+
+Issues should be used to report problems, request a new feature, or to discuss potential changes *before* a PR is created.
+When you https://github.com/JonasPammer/ansible-role-openssl/issues/new[
+create a new Issue], a template will be loaded that will guide you through collecting and providing the information we need to investigate.
+
+If you find an Issue that addresses the problem you're having,
+please add your own reproduction information to the existing issue *rather than creating a new one*.
+Adding a https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/[reaction]
+can also help be indicating to our maintainers that a particular problem is affecting more than just the reporter.
+
+==== Pull Requests
+
+PRs to this Project are always welcome and can be a quick way to get your fix or improvement slated for the next release.
+https://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests/[In general], PRs should:
+
+* Only fix/add the functionality in question *OR* address wide-spread whitespace/style issues, not both.
+* Add unit or integration tests for fixed or changed functionality (if a test suite already exists).
+* *Address a single concern*
+* *Include documentation* in the repo
+* Be accompanied by a complete Pull Request template (loaded automatically when a PR is created).
+
+For changes that address core functionality or would require breaking changes (e.g. a major release),
+it's best to open an Issue to discuss your proposal first.
+
+In general, we follow the "fork-and-pull" Git workflow
+
+1. Fork the repository to your own Github account
+2. Clone the project to your machine
+3. Create a branch locally with a succinct but descriptive name
+4. Commit changes to the branch
+5. Following any formatting and testing guidelines specific to this repo
+6. Push changes to your fork
+7. Open a PR in our repository and follow the PR template so that we can efficiently review the changes.

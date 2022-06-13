@@ -1,0 +1,96 @@
+---
+name: "\U0001F41B Bug Report"
+description: "Report an error you encountered because of using this role."
+title: "[Bug]: "
+labels: ["kind/bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      value: |
+        I was doing ...
+
+        I ran ...
+
+        I expected ...
+
+        I got ...
+    validations:
+      required: true
+  - type: textarea
+    id: playbook
+    attributes:
+      label: Playbook
+      description: Please paste the playbook you are using.
+      placeholder: |
+        ---
+        - hosts: servers:&provisioned:&linux
+          name: Role Test
+
+          roles:
+            - openssl
+      render: yaml
+    validations:
+      required: true
+  - type: input
+    id: role-version
+    attributes:
+      label: Role Version
+      description: What version of the role did you run?
+    validations:
+      required: true
+  - type: textarea
+    id: ansible-version
+    attributes:
+      label: Environment / Control Node Information
+      description: |
+        What Operating system and Ansible version does your *provisioner* use?
+        Execute the following commands on it to find out:
+
+        * `cat /etc/os-release`
+        * `ansible --version`
+
+        This will be automatically formatted into code, so no need for backticks.
+      placeholder: |
+        yourname@airtop:~$ cat /etc/os-release
+        NAME="Linux Mint"
+        VERSION="20 (Ulyana)"
+        …(output trimmed for placeholder only)
+
+        yourname@airtop:~$ ansible --version
+        ansible [core 2.12.1]
+          config file = /etc/ansible/ansible.cfg
+          configured module search path = ['/home/yourname/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+          ansible python module location = /usr/lib/python3/dist-packages/ansible
+          ansible collection location = /home/yourname/.ansible/collections:/usr/share/ansible/collections
+          executable location = /usr/bin/ansible
+          python version = 3.8.10 (default, Nov 26 2021, 20:14:08) [GCC 9.3.0]
+          jinja version = 3.0.1
+          libyaml = True
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: machine-version
+    attributes:
+      label: Environment / Managed Node Information
+      description: |
+        What Operating system did your *managed node* use?
+        Execute the following commands on it to find out:
+
+        * `cat /etc/os-release`
+
+        This will be automatically formatted into code, so no need for backticks.
+      placeholder: |
+        ubuntu@srvweb2:~$ cat /etc/os-release
+        NAME="Debian"
+        …(output trimmed for placeholder only)
+      render: shell
+    validations:
+      required: true

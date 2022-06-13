@@ -1,0 +1,8 @@
+---
+roles:
+  - name: jonaspammer.bootstrap
+#  - name: jonaspammer.core_dependencies
+
+# NOTE: list all collections used here (even if included in `ansible`)
+collections:
+  - name: community.general

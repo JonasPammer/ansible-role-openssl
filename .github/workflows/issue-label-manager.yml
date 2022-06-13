@@ -1,0 +1,24 @@
+---
+name: create declared labels
+permissions:
+  issues: write
+  pull-requests: write
+"on":
+  issues:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/labels.json"
+
+jobs:
+  labels:
+    name: Invoke issue-label-manager action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lannonbr/issue-label-manager-action@3.0.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        with:
+          delete: true # will delete any labels that aren't in the .github/labels.json (this is set to false by default)

@@ -1,0 +1,11 @@
+---
+extends: default # https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+
+rules:
+  line-length:
+    max: 140
+  comments:
+    min-spaces-from-content: 1 # https://github.com/prettier/prettier/issues/6780
+
+ignore: |
+  .tox/

@@ -1,0 +1,15 @@
+---
+- name: output some generally helpful debug information about the provisioned machine
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: debug output machine facts
+      ansible.builtin.include_tasks: ../resources/debug.yml
+
+### Actual Role Verification Tasks:
+- name: Verify
+  hosts: all
+
+  tasks:

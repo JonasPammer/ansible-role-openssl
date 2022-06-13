@@ -1,0 +1,14 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    ignore:
+      # TODO temporary until
+      #      https://github.com/JonasPammer/cookiecutter-ansible-role/issues/9
+      #      is resolved
+      - dependency-name: lannonbr/issue-label-manager-action
+    schedule:
+      interval: monthly
+      day: sunday
+      time: "01:00"

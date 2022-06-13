@@ -1,0 +1,27 @@
+---
+name: "\U0001F680 Feature Request"
+description: "Suggest a general idea for this project."
+title: "[Feature Request]: "
+labels: ["kind/feature", "needs-triage"]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed feature
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this feature required?
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description:
+    validations:
+      required: false

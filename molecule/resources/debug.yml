@@ -1,0 +1,12 @@
+---
+- name: DEBUG module variables ("vars")
+  ansible.builtin.debug: msg="{{ vars | to_nice_yaml }}"
+  tags: vars
+
+- name: DEBUG environment variables ("environment")
+  ansible.builtin.debug: msg="{{ environment | to_nice_yaml }}"
+  tags: environment
+
+- name: DEBUG host variables ("hostvars")
+  ansible.builtin.debug: msg="{{ hostvars | to_nice_yaml }}"
+  tags: hostvars

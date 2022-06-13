@@ -1,0 +1,6 @@
+---
+ignored:
+  - DL3008 # Pin versions in apt get install.
+  - DL3013 # Pin versions in pip
+  - DL3042 # Avoid pip cache
+  - DL3009 # Avoid apt cache
