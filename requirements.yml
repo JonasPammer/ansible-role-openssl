@@ -1,5 +1,6 @@
 ---
 roles:
+  - name: jonaspammer.pip
   - name: jonaspammer.bootstrap
 #  - name: jonaspammer.core_dependencies
 
