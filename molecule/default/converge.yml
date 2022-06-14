@@ -2,5 +2,10 @@
 - name: Converge
   hosts: all
 
+  vars:
+    openssl_items:
+      - filename: jonaspammer_at
+        csr_common_name: jonaspammer.at
+
   roles:
     - role: "ansible-role-openssl"

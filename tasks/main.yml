@@ -5,3 +5,50 @@
   ansible.builtin.import_tasks: assert.yml
   run_once: true
   delegate_to: localhost
+
+- name: Install requirements.
+  ansible.builtin.package:
+    name: "{{ openssl__requirements }}"
+    state: present
+
+- name: Install pip packages.
+  ansible.builtin.pip:
+    name: "{{ openssl__pip_packages }}"
+    extra_args: "{{ '--prefer-binary' if openssl_cryptography_prefer_binary else '' }}"
+  environment:
+    CRYPTOGRAPHY_DONT_BUILD_RUST: "{{ '1' if openssl_cryptography_build_rust else '0' }}"
+  ignore_errors: true
+
+- name: Create key directory.
+  ansible.builtin.file:
+    path: "{{ openssl_key_directory }}"
+    state: directory
+    mode: u=rwx,g=rx,o=
+    owner: root
+    group: root
+
+- name: Create csr directory (if not same as key directory).
+  ansible.builtin.file:
+    path: "{{ openssl_csr_directory }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
+  when: openssl_csr_directory != openssl_key_directory
+
+- name: Create crt directory (if not same as crs directory).
+  ansible.builtin.file:
+    path: "{{ openssl_crt_directory }}"
+    state: directory
+    mode: u=rwx,g=rx,o=rx
+    owner: root
+    group: root
+  when: openssl_crt_directory != openssl_csr_directory
+
+- name: include Tasks to create certificates.
+  ansible.builtin.include_tasks:
+    file: create.yml
+  loop: "{{ openssl_items }}"
+  when:
+    - openssl_items is defined
+    - openssl_items | length > 0

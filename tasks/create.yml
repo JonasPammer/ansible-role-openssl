@@ -1,0 +1,192 @@
+---
+# tasks file for jonaspammer.openssl
+
+- name: Generate OpenSSL private key ('.key').
+  community.crypto.openssl_privatekey:
+    path: "{{ openssl_key_directory }}/{{ item.filename }}.key"
+    mode: u=rw,g=,o=
+    backup: "{{ item.privatekey_backup | default(item.default_backup | default(omit)) }}"
+    cipher: "{{ item.privatekey_cipher | default('auto' if item.privatekey_passphrase|default(false) else omit) }}"
+    curve: "{{ item.privatekey_curve | default(omit) }}"
+    group: "{{ item.privatekey_group | default(item.default_group | default(omit)) }}"
+    owner: "{{ item.privatekey_owner | default(item.default_owner | default(omit)) }}"
+    passphrase: "{{ item.privatekey_passphrase | default(omit) }}"
+    selevel: "{{ item.privatekey_selevel | default(item.default_selevel | default(omit)) }}"
+    serole: "{{ item.privatekey_serole | default(item.default_serole | default(omit)) }}"
+    setype: "{{ item.privatekey_setype | default(item.default_setype | default(omit)) }}"
+    seuser: "{{ item.privatekey_seuser | default(item.default_seuser | default(omit)) }}"
+    size: "{{ item.privatekey_size | default(omit) }}"
+    state: "{{ item.privatekey_state | default(item.default_state | default(omit)) }}"
+    type: "{{ item.privatekey_type | default(omit) }}"
+
+- name: Generate OpenSSL Certificate Signing Request with appropriate subject information ('.csr').
+  community.crypto.openssl_csr:
+    path: "{{ openssl_csr_directory }}/{{ item.filename }}.csr"
+    privatekey_passphrase: "{{ item.privatekey_passphrase | default(omit) }}"
+    privatekey_path: "{{ openssl_key_directory }}/{{ item.filename }}.key"
+    common_name: "{{ item.csr_common_name }}"
+    mode: u=rw,g=r,o=r
+    authority_cert_issuer: "{{ item.csr_authority_cert_issuer | default(omit) }}"
+    authority_cert_serial_number: "{{ item.csr_authority_cert_serial_number | default(omit) }}"
+    authority_key_identifier: "{{ item.csr_authority_key_identifier | default(omit) }}"
+    backup: "{{ item.csr_backup | default(item.default_backup | default(omit)) }}"
+    basic_constraints: "{{ item.csr_basic_constraints | default(omit) }}"
+    basic_constraints_critical: "{{ item.csr_basic_constraints_critical | default(omit) }}"
+    country_name: "{{ item.csr_country_name | default(omit) }}"
+    create_subject_key_identifier: "{{ item.csr_create_subject_key_identifier | default(omit) }}"
+    digest: "{{ item.csr_digest | default(omit) }}"
+    email_address: "{{ item.csr_email_address | default(omit) }}"
+    extended_key_usage: "{{ item.csr_extended_key_usage | default(omit) }}"
+    extended_key_usage_critical: "{{ item.csr_extended_key_usage_critical | default(omit) }}"
+    force: "{{ item.csr_force | default(item.default_force | default(omit)) }}"
+    group: "{{ item.csr_group | default(item.default_group | default(omit)) }}"
+    key_usage: "{{ item.csr_key_usage | default(omit) }}"
+    key_usage_critical: "{{ item.csr_key_usage_critical | default(omit) }}"
+    locality_name: "{{ item.csr_locality_name | default(omit) }}"
+    ocsp_must_staple: "{{ item.csr_ocsp_must_staple | default(omit) }}"
+    ocsp_must_staple_critical: "{{ item.csr_ocsp_must_staple_critical | default(omit) }}"
+    organization_name: "{{ item.csr_organization_name | default(omit) }}"
+    organizational_unit_name: "{{ item.csr_organizational_unit_name | default(omit) }}"
+    owner: "{{ item.csr_owner | default(item.default_owner | default(omit)) }}"
+    selevel: "{{ item.csr_selevel | default(item.default_selevel | default(omit)) }}"
+    serole: "{{ item.csr_serole | default(item.default_serole | default(omit)) }}"
+    setype: "{{ item.csr_setype | default(item.default_setype | default(omit)) }}"
+    seuser: "{{ item.csr_seuser | default(item.default_seuser | default(omit)) }}"
+    state: "{{ item.csr_state | default(omit) }}"
+    state_or_province_name: "{{ item.csr_state_or_province_name | default(omit) }}"
+    subject: "{{ item.csr_subject | default(omit) }}"
+    subject_alt_name: "{{ item.csr_subject_alt_name | default(omit) }}"
+    subject_alt_name_critical: "{{ item.csr_subject_alt_name_critical | default(omit) }}"
+    subject_key_identifier: "{{ item.csr_subject_key_identifier | default(omit) }}"
+    use_common_name_for_san: "{{ item.csr_use_common_name_for_san | default(omit) }}"
+
+- name: Generate Self Signed OpenSSL X509 certificate ('.crt').
+  community.crypto.x509_certificate:
+    path: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+    privatekey_passphrase: "{{ item.privatekey_passphrase | default(omit) }}"
+    privatekey_path: "{{ openssl_key_directory }}/{{ item.filename }}.key"
+    csr_path: "{{ openssl_csr_directory }}/{{ item.filename }}.csr"
+    provider: "{{ item.x509cert_provider | default('selfsigned') }}"
+    mode: u=rw,g=r,o=r
+    acme_accountkey_path: "{{ item.x509cert_acme_accountkey_path | default(omit) }}"
+    acme_chain: "{{ item.x509cert_acme_chain | default(omit) }}"
+    acme_challenge_path: "{{ item.x509cert_acme_challenge_path | default(omit) }}"
+    attributes: "{{ item.x509cert_attributes | default(omit) }}"
+    backup: "{{ item.x509cert_backup | default(item.default_backup | default(omit)) }}"
+    entrust_api_client_cert_key_path: "{{ item.x509cert_entrust_api_client_cert_key_path | default(omit) }}"
+    entrust_api_client_cert_path: "{{ item.x509cert_entrust_api_client_cert_path | default(omit) }}"
+    entrust_api_key: "{{ item.x509cert_entrust_api_key | default(omit) }}"
+    entrust_api_specification_path: "{{ item.x509cert_entrust_api_specification_path | default(omit) }}"
+    entrust_cert_type: "{{ item.x509cert_entrust_cert_type | default(omit) }}"
+    entrust_not_after: "{{ item.x509cert_entrust_not_after | default(omit) }}"
+    entrust_requester_email: "{{ item.x509cert_entrust_requester_email | default(omit) }}"
+    entrust_requester_name: "{{ item.x509cert_entrust_requester_name | default(omit) }}"
+    entrust_requester_phone: "{{ item.x509cert_entrust_requester_phone | default(omit) }}"
+    extended_key_usage: "{{ item.x509cert_extended_key_usage | default(omit) }}"
+    extended_key_usage_strict: "{{ item.x509cert_extended_key_usage_strict | default(omit) }}"
+    force: "{{ item.x509cert_force | default(item.default_force | default(omit)) }}"
+    group: "{{ item.x509cert_group | default(item.default_group | default(omit)) }}"
+    has_expired: "{{ item.x509cert_has_expired | default(omit) }}"
+    invalid_at: "{{ item.x509cert_invalid_at | default(omit) }}"
+    issuer: "{{ item.x509cert_issuer | default(omit) }}"
+    issuer_strict: "{{ item.x509cert_issuer_strict | default(omit) }}"
+    key_usage: "{{ item.x509cert_key_usage | default(omit) }}"
+    key_usage_strict: "{{ item.x509cert_key_usage_strict | default(omit) }}"
+    not_after: "{{ item.x509cert_not_after | default(omit) }}"
+    not_before: "{{ item.x509cert_not_before | default(omit) }}"
+    ownca_create_authority_key_identifier: "{{ item.x509cert_ownca_create_authority_key_identifier | default(omit) }}"
+    ownca_create_subject_key_identifier: "{{ item.x509cert_ownca_create_subject_key_identifier | default(omit) }}"
+    ownca_digest: "{{ item.x509cert_ownca_digest | default(omit) }}"
+    ownca_not_after: "{{ item.x509cert_ownca_not_after | default(omit) }}"
+    ownca_not_before: "{{ item.x509cert_ownca_not_before | default(omit) }}"
+    ownca_path: "{{ item.x509cert_ownca_path | default(omit) }}"
+    ownca_privatekey_passphrase: "{{ item.x509cert_ownca_privatekey_passphrase | default(omit) }}"
+    ownca_privatekey_path: "{{ item.x509cert_ownca_privatekey_path | default(omit) }}"
+    ownca_version: "{{ item.x509cert_ownca_version | default(omit) }}"
+    owner: "{{ item.x509cert_owner | default(item.default_owner | default(omit)) }}"
+    select_crypto_backend: "{{ item.x509cert_select_crypto_backend | default(omit) }}"
+    selevel: "{{ item.x509cert_selevel | default(item.default_selevel | default(omit)) }}"
+    serole: "{{ item.x509cert_serole | default(item.default_serole | default(omit)) }}"
+    setype: "{{ item.x509cert_setype | default(item.default_setype | default(omit)) }}"
+    seuser: "{{ item.x509cert_seuser | default(item.default_seuser | default(omit)) }}"
+    selfsigned_create_subject_key_identifier: "{{ item.x509cert_selfsigned_create_subject_key_identifier | default(omit) }}"
+    selfsigned_digest: "{{ item.x509cert_selfsigned_digest | default(omit) }}"
+    selfsigned_not_after: "{{ item.x509cert_selfsigned_not_after | default(omit) }}"
+    selfsigned_not_before: "{{ item.x509cert_selfsigned_not_before | default(omit) }}"
+    selfsigned_version: "{{ item.x509cert_selfsigned_version | default(omit) }}"
+    signature_algorithms: "{{ item.x509cert_signature_algorithms | default(omit) }}"
+    state: "{{ item.x509cert_state | default(omit) }}"
+    subject: "{{ item.x509cert_subject | default(omit) }}"
+    subject_alt_name: "{{ item.x509cert_subject_alt_name | default(omit) }}"
+    subject_alt_name_strict: "{{ item.x509cert_subject_alt_name_strict | default(omit) }}"
+    subject_strict: "{{ item.x509cert_subject_strict | default(omit) }}"
+    unsafe_writes: "{{ item.x509cert_unsafe_writes | default(omit) }}"
+    valid_at: "{{ item.x509cert_valid_at | default(omit) }}"
+    valid_in: "{{ item.x509cert_valid_in | default(omit) }}"
+    version: "{{ item.x509cert_version | default(omit) }}"
+
+- name: create PKCS#12 file ('.p12')
+  community.crypto.openssl_pkcs12:
+    action: export
+    path: "{{ openssl_key_directory }}/{{ item.filename }}.p12"
+    friendly_name: "{{ item.filename }}"
+    privatekey_passphrase: "{{ item.privatekey_passphrase | default(omit) }}"
+    privatekey_path: "{{ openssl_key_directory }}/{{ item.filename }}.key"
+    certificate_path: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+    mode: u=rw,g=r,o=
+    state: "{{ item.pkcs12_state | default(omit) }}"
+    attributes: "{{ item.pkcs12_attributes | default(omit) }}"
+    backup: "{{ item.pkcs12_backup | default(item.default_backup | default(omit)) }}"
+    force: "{{ item.pkcs12_force | default(item.default_force | default(omit)) }}"
+    group: "{{ item.pkcs12_group | default(item.default_group | default(omit)) }}"
+    iter_size: "{{ item.pkcs12_iter_size | default(omit) }}"
+    maciter_size: "{{ item.pkcs12_maciter_size | default(omit) }}"
+    other_certificates: "{{ item.pkcs12_other_certificates | default(omit) }}"
+    other_certificates_parse_all: "{{ item.pkcs12_other_certificates_parse_all | default(omit) }}"
+    owner: "{{ item.pkcs12_owner | default(item.default_owner | default(omit)) }}"
+    passphrase: "{{ item.pkcs12_passphrase | default(omit) }}"
+    select_crypto_backend: "{{ item.pkcs12_select_crypto_backend | default(omit) }}"
+    selevel: "{{ item.pkcs12_selevel | default(item.default_selevel | default(omit)) }}"
+    serole: "{{ item.pkcs12_serole | default(item.default_serole | default(omit)) }}"
+    setype: "{{ item.pkcs12_setype | default(item.default_setype | default(omit)) }}"
+    seuser: "{{ item.pkcs12_seuser | default(item.default_seuser | default(omit)) }}"
+
+- name: read generated private key
+  ansible.builtin.slurp:
+    src: "{{ openssl_key_directory }}/{{ item.filename }}.key"
+  register: openssl_private_key
+
+- name: read generated certificate
+  ansible.builtin.slurp:
+    src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+  register: openssl_certifcate
+
+- name: Create combined private_key and certificate file ('.keycrt').
+  ansible.builtin.copy:
+    dest: "{{ openssl_key_directory }}/{{ item.filename }}.keycrt"
+    content: |-
+      {{ openssl_private_key.content | b64decode | trim }}
+      {{ openssl_certifcate.content | b64decode | trim }}
+    mode: u=rw,g=r,o=
+
+# as described https://superuser.com/a/719047
+- block:
+    - name: Copy Self Signed OpenSSL certificate to '/usr/local/share/ca-certificates/…'.
+      become: true
+      ansible.builtin.copy:
+        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+        remote_src: true
+        dest: "/usr/local/share/ca-certificates/{{ item.filename }}.crt"
+        owner: "root"
+        group: "root"
+        mode: u=rw,g=r,o=r
+
+    - name: Run command to create CA-Certificate-File in system directory '/etc/ssl/certs/…' (when it does not exist).
+      become: true
+      ansible.builtin.command:
+        cmd: >
+          update-ca-certificates --verbose
+          {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}"
+        creates: "/etc/ssl/certs/{{ item.filename }}.pem"
+      notify: restart httpd
+  when: item.install_ca_to_system | default(false)

@@ -25,6 +25,15 @@ galaxy_info:
         - bionic # ubuntu1804 (actively tested)
         - focal # ubuntu2004 (actively tested)
 
-  galaxy_tags: []
+  galaxy_tags:
+    - networking
+    - system
+    - web
+    #    - certbot
+    #    - letsencrypt
+    - encryption
+    - certificates
+    - ssl
+    - https
 
 dependencies: []

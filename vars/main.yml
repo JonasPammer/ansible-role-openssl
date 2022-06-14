@@ -2,12 +2,41 @@
 # vars file of ansible-role jonaspammer.openssl
 # (tl;dr: almost not overwrite-able variables)
 
-_openssl__somevar:
-  Debian: ""
-  Debian_10: ""
-  RedHat: ""
+_openssl__requirements:
+  default: []
+  Alpine:
+    - rust
+    - cargo
 
-openssl__somevar: "{{
+openssl__pip_packages:
+  - "cryptography>3,<3.5"
+
+# This directory stores sensitive objects. (key, p12 and pkcs12)
+_openssl_key_directory:
+  default: /tmp
+  Alpine: /etc/ssl/private
+  Debian: /etc/ssl/private
+  RedHat: &redhat_key_directory /etc/pki/tls/private
+  Rocky: *redhat_key_directory
+  Suse: /etc/ssl/private
+# This directory stores public, non-persistent objects. (csr)
+_openssl_csr_directory:
+  default: /tmp
+  Alpine: /etc/ssl/misc
+  Debian: /etc/ssl/misc
+  RedHat: &redhat_csr_directory /etc/pki/tls/misc
+  Rocky: *redhat_csr_directory
+  Suse: /etc/ssl
+# This directory stores public, persistent objects. (crt)
+_openssl_crt_directory:
+  default: /tmp
+  Alpine: /etc/ssl/certs
+  Debian: /etc/ssl/certs
+  RedHat: &redhat_crt_directory /etc/pki/tls/certs
+  Rocky: *redhat_crt_directory
+  Suse: /etc/ssl/certs
+
+openssl__requirements: "{{
   _openssl_somevar[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
   _openssl_somevar[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
   _openssl_somevar[ansible_distribution])|default(

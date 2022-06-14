@@ -1,3 +1,29 @@
 ---
 # defaults file of ansible-role jonaspammer.openssl
 # See README.adoc for documentation. If you change a default here, also update it in the README.
+
+openssl_directory: ~
+openssl_cryptography_prefer_binary: true
+openssl_cryptography_build_rust: false
+
+openssl__requirements:
+  "{{ _openssl__requirements[ansible_distribution ~'_'~ ansible_distribution_major_version]|default(
+  _openssl__requirements[ansible_distribution])|default(
+  _openssl__requirements[ansible_os_family])|default(
+  _openssl__requirements['default']) }}"
+
+openssl_key_directory: "{{ openssl_directory |default(
+  _openssl_key_directory[ansible_distribution ~'_'~ ansible_distribution_major_version], true)|default(
+  _openssl_key_directory[ansible_distribution])|default(
+  _openssl_key_directory[ansible_os_family])|default(
+  _openssl_key_directory['default']) }}"
+openssl_csr_directory: "{{ openssl_directory |default(
+  _openssl_csr_directory[ansible_distribution ~'_'~ ansible_distribution_major_version], true)|default(
+  _openssl_csr_directory[ansible_distribution])|default(
+  _openssl_csr_directory[ansible_os_family])|default(
+  _openssl_csr_directory['default']) }}"
+openssl_crt_directory: "{{ openssl_directory |default(
+  _openssl_crt_directory[ansible_distribution ~'_'~ ansible_distribution_major_version], true)|default(
+  _openssl_crt_directory[ansible_distribution])|default(
+  _openssl_crt_directory[ansible_os_family])|default(
+  _openssl_crt_directory['default']) }}"

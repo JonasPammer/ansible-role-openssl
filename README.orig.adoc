@@ -43,9 +43,16 @@ include::meta/main.yml[]
 // Any prerequisites that may not be covered by this role or Ansible itself should be mentioned here.
 The Ansible User needs to be able to `become`.
 
-
-The https://galaxy.ansible.com/community/general[`community.general` collection]
+The https://galaxy.ansible.com/community/crypto[`community.crypto`-collection]
 must be installed on the Ansible controller.
+
+An up-to-date pip (i.e. >21) must be installed on the host.
+Needed for installation of https://pypi.org/project/cryptography/[
+`cryptography>3` through pip].
+
+A Rust compiler must be installed on the host. Needed for installation of
+https://pypi.org/project/cryptography/[cryptography>3 through pip],
+if `openssl_cryptography_build_rust` is true.
 
 
 [[variables]]
@@ -55,26 +62,262 @@ must be installed on the Ansible controller.
 // Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.)
 // should be mentioned here as well.
 
-[source,yaml]
-----
-variable: default value
-----
-Description
+=== Role Variables to configure the installation of Cryptography
+The installation of cryptography is often a pain in the ass.
+I have yet to find a single exception to this rule.
+It has cost me feelingly, or even really, dozens of brain-tearing hours.
 
-
-[source,yaml]
-----
-variable: [OS-specific by default, see /vars directory]
-----
-Description
-
+The below values, and their defaults seem to do the job.
 
 [source,yaml]
 ----
-variable: [OS-specific by default, see /vars directory]
+openssl_cryptography_prefer_binary: true
 ----
-(Debian/Ubuntu only)
-Description
+Defines if `--prefer-binary` is passed to the `pip install` command.
+
+[source,yaml]
+----
+openssl_cryptography_build_rust: false
+----
+Defines if the environment-variable `CRYPTOGRAPHY_DONT_BUILD_RUST` should be set to `1` (true) or `0` (false)
+while issuing the `pip install` command.
+
+
+[[variables:openssl]]
+=== OpenSSL
+
+[source,yaml]
+----
+openssl_items: []
+----
+List of ssl key/csr/crt/p12's to generate.
+An entry may have the following values:
+
+[NOTE]
+====
+This role gives you control over nearly all variables,
+but also fills-in variables on its own (e.g. relative ones like `privatekey_path`).
+====
+
+filename (Required)::
+Name used for every file.
+
+install_ca_to_system::
+(Debian/Ubuntu ONLY)
+Whether to install the CA to `/etc/ssl/certs/ca-certificates.crt` using `update-ca-certificates`
+as described in https://superuser.com/a/719047[this superuser answer].
+Defaults to `false`.
+
+[TIP]
+====
+// Fucked up
+Messed up?
+Try running
+
+* `update-ca-certificates --fresh` (Debian/Ubuntu)
+====
+
+
+=====
+The below values can be used to set the default parameters
+of every module where applicable.
+See the page of any below module for documentation.
+
+default_group::
+default_owner::
+default_backup::
+default_selevel::
+default_serole::
+default_setype::
+default_seuser::
+default_state::
+default_force::
+=====
+
+=====
+Parameters used to generate OpenSSL private key ('.key')
+using https://docs.ansible.com/ansible/2.9/modules/openssl_privatekey_module.html[openssl_privatekey].
+
+`path`, `mode` and `unsafe_writes` can not be supplied.
+
+#privatekey_backup#::
+privatekey_cipher::
+privatekey_curve::
+privatekey_group::
+privatekey_owner::
+privatekey_passphrase::
+_privatekey_selevel_::
+_privatekey_serole_::
+_privatekey_setype_::
+_privatekey_seuser_::
+#privatekey_size#::
+#privatekey_state#::
+#privatekey_type#::
+=====
+
+=====
+Parameters used to generate OpenSSL Certificate Signing Request with appropriate subject information ('.csr')
+using https://docs.ansible.com/ansible/2.9/modules/openssl_csr_module.html[community.crypto.openssl_csr].
+
+`mode`, `path`, `privatekey_passphrase`, `privatekey_path` and `unsafe_writes` can not be supplied.
+
+This role forces you to supply at-least `csr_common_name`.
+
+csr_authority_cert_issuer::
+csr_authority_cert_serial_number::
+csr_authority_key_identifier::
+#csr_backup#::
+csr_basic_constraints::
+csr_basic_constraints_critical::
+#csr_common_name (Required)#::
+#csr_country_name#::
+csr_create_subject_key_identifier::
+csr_digest::
+#csr_email_address#::
+csr_extended_key_usage::
+csr_extended_key_usage_critical::
+csr_force::
+csr_group::
+csr_key_usage::
+csr_key_usage_critical::
+csr_locality_name::
+csr_ocsp_must_staple::
+csr_ocsp_must_staple_critical::
+#csr_organization_name#::
+csr_organizational_unit_name::
+csr_owner::
+_csr_selevel_::
+_csr_serole_::
+_csr_setype_::
+_csr_seuser_::
+#csr_state#::
+#csr_state_or_province_name#::
+csr_subject::
+csr_subject_alt_name::
+csr_subject_alt_name_critical::
+csr_subject_key_identifier::
+csr_use_common_name_for_san::
+=====
+
+=====
+Parameters used to generate Self Signed OpenSSL certificate ('.crt')
+using https://docs.ansible.com/ansible/2.9/modules/openssl_certificate_module.html[community.crypto.openssl_certificate].
+
+`csr_path`,  `mode`, `path`, `privatekey_passphrase` and `privatekey_path` can not be supplied.
+(`privatekey_passphrase` can be supplied using `csr_privatekey_passphrase`)
+
+This role sets `provider` to "`selfsigned`" by default.
+
+
+x509cert_acme_accountkey_path::
+x509cert_acme_chain::
+x509cert_acme_challenge_path::
+x509cert_attributes::
+#x509cert_backup#::
+x509cert_entrust_api_client_cert_key_path::
+x509cert_entrust_api_client_cert_path::
+x509cert_entrust_api_key::
+x509cert_entrust_api_specification_path::
+x509cert_entrust_cert_type::
+x509cert_entrust_not_after::
+x509cert_entrust_requester_email::
+x509cert_entrust_requester_name::
+x509cert_entrust_requester_phone::
+x509cert_extended_key_usage::
+x509cert_extended_key_usage_strict::
+x509cert_force::
+x509cert_group::
+x509cert_has_expired::
+x509cert_invalid_at::
+x509cert_issuer::
+x509cert_issuer_strict::
+x509cert_key_usage::
+x509cert_key_usage_strict::
+x509cert_not_after::
+x509cert_not_before::
+x509cert_ownca_create_authority_key_identifier::
+x509cert_ownca_create_subject_key_identifier::
+x509cert_ownca_digest::
+x509cert_ownca_not_after::
+x509cert_ownca_not_before::
+x509cert_ownca_path::
+x509cert_ownca_privatekey_passphrase::
+x509cert_ownca_privatekey_path::
+x509cert_ownca_version::
+x509cert_owner::
+x509cert_provider:: Defaults to `selfsigned` in this role.
+x509cert_select_crypto_backend::
+_x509cert_selevel_::
+_x509cert_serole_::
+_x509cert_setype_::
+_x509cert_seuser_::
+x509cert_selfsigned_create_subject_key_identifier::
+x509cert_selfsigned_digest::
+#x509cert_selfsigned_not_after#::
+#x509cert_selfsigned_not_before#::
+x509cert_selfsigned_version::
+x509cert_signature_algorithms::
+#x509cert_state#::
+x509cert_subject::
+x509cert_subject_alt_name::
+x509cert_subject_alt_name_strict::
+x509cert_subject_strict::
+x509cert_valid_at::
+x509cert_valid_in::
+x509cert_version::
+=====
+
+
+=====
+Parameters used to generate Self Signed OpenSSL certificate ('.crt')
+https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_pkcs12_module.html[community.crypto.openssl_pkcs12].
+
+`action`, `certificate_path`, `friendly_name`, `mode`,  `path`, `privatekey_passphrase`, `privatekey_path`, `return_content` and `unsafe_writes` can not be supplied.
+(`privatekey_passphrase` can be supplied using `csr_privatekey_passphrase`)
+
+pkcs12_attributes::
+pkcs12_backup::
+pkcs12_force::
+pkcs12_group::
+pkcs12_iter_size::
+pkcs12_maciter_size::
+pkcs12_other_certificates::
+pkcs12_other_certificates_parse_all::
+pkcs12_owner::
+pkcs12_passphrase::
+pkcs12_select_crypto_backend::
+pkcs12_selevel::
+pkcs12_serole::
+pkcs12_setype::
+pkcs12_seuser::
+pkcs12_state::
+=====
+
+=== Directory Configuration
+
+[source,yaml]
+----
+openssl_directory: ~
+----
+If given, this sets the default for the `openssl_[key|crt|csr]_directory`.
+
+[source,yaml]
+----
+openssl_key_directory: [OS-specific by default, see /vars directory]
+----
+This directory stores sensitive objects (`key`, `p12` and `pkcs12`).
+
+[source,yaml]
+----
+openssl_crt_directory: [OS-specific by default, see /vars directory]
+----
+This directory stores public, non-persistent objects (`csr`).
+
+[source,yaml]
+----
+openssl_csr_directory: [OS-specific by default, see /vars directory]
+----
+This directory stores public, persistent objects (`crt`).
 
 
 [[public_vars]]
@@ -124,11 +367,18 @@ requirements.yml dependency graph of jonaspammer.openssl]
 [source,yaml]
 ----
 roles:
-  - "jonaspammer.openssl"
+  - "openssl"
 
 vars:
-  some_var: "some_value"
+  openssl_items:
+    - filename: jonaspammer_at
+      csr_common_name: jonaspammer.at
 ----
+
+Generates:
+
+* TODO
+* TODO
 ====
 
 

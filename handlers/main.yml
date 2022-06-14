@@ -1,2 +1,9 @@
 ---
 # handlers file of ansible-role jonaspammer.openssl
+
+- name: restart httpd
+  ansible.builtin.service:
+    name: "{{ apache__service | default('apache2') }}"
+    state: restarted
+  register: __register_service_restart_httpd
+  failed_when: '"find" not in __register_service_restart_httpd.msg'
