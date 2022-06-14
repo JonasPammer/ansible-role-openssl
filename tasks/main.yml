@@ -11,6 +11,13 @@
     name: "{{ openssl__requirements }}"
     state: present
 
+- name: get pip version (1)
+  community.general.pip_package_info:
+  register: openssl__register_pip_package_info
+
+- name: debug
+  ansible.builtin.debug: var=openssl__register_pip_package_info
+
 - name: Install pip packages.
   ansible.builtin.pip:
     name: "{{ openssl__pip_packages }}"
@@ -18,7 +25,6 @@
   environment:
     CRYPTOGRAPHY_DONT_BUILD_RUST: "{{ '1' if openssl_cryptography_build_rust else '0' }}"
   ignore_errors: true
-  register: openssl__register_pip_install_1
 
 - name: Install pip packages (no '--prefer-binary').
   ansible.builtin.pip:
@@ -26,7 +32,6 @@
   environment:
     CRYPTOGRAPHY_DONT_BUILD_RUST: "{{ '1' if openssl_cryptography_build_rust else '0' }}"
   ignore_errors: true
-  when: '"no such option" in openssl__register_pip_install_1.stderr'
 
 - name: Create key directory.
   ansible.builtin.file:
