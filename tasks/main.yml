@@ -18,6 +18,7 @@
 - name: debug
   ansible.builtin.debug: var=openssl__register_pip_package_info
 
+# pip 18.0+ (https://github.com/pypa/pip/issues/3785)
 - name: Install pip packages.
   ansible.builtin.pip:
     name: "{{ openssl__pip_packages }}"
