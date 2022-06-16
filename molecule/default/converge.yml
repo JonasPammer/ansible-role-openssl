@@ -8,5 +8,4 @@
         csr_common_name: jonaspammer.at
 
   roles:
-    - role: jonaspammer.pip
     - role: "ansible-role-openssl"

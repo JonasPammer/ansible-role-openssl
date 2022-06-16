@@ -6,4 +6,5 @@
 
   roles:
     - role: jonaspammer.bootstrap
+    - role: jonaspammer.pip
     #    - role: jonaspammer.core_dependencies
