@@ -1,6 +1,9 @@
 ---
 roles:
   - name: jonaspammer.pip
+    src: https://github.com/JonasPammer/ansible-role-pip
+    scm: git
+    version: bug-centos8-fails-pip
   - name: jonaspammer.bootstrap
 #  - name: jonaspammer.core_dependencies
 
