@@ -11,7 +11,7 @@ driver:
   name: docker
 platforms:
   # service-enabled Docker image by geerlingguy
-  - name: instance-${TOX_ENVNAME}
+  - name: instance-${TOX_ENVNAME}-${MOLECULE_DISTRO:-debian10}
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-debian10}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
