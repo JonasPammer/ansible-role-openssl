@@ -12,6 +12,14 @@
 - name: Verify
   hosts: all
 
+  vars:
+    openssl_items:
+      - filename: jonaspammer_at
+        csr_common_name: jonaspammer.at
+
+  roles:
+    - role: "ansible-role-openssl" # actually needed for vars only
+
   tasks:
     - name: get md5 hash of crt
       ansible.builtin.shell: >
