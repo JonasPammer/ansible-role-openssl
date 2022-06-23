@@ -862,10 +862,12 @@ but also fills-in variables on its own (e.g. relative ones like <code>privatekey
 </dd>
 <dt class="hdlist1">install_ca_to_system</dt>
 <dd>
-<p>(Debian/Ubuntu ONLY)
-Whether to install the CA to <code>/etc/ssl/certs/ca-certificates.crt</code> using <code>update-ca-certificates</code>
-as described in <a href="https://superuser.com/a/719047">this superuser answer</a>.
-Defaults to <code>false</code>.</p>
+<p><em>Boolean</em>. Defaults to <code>false</code>.<br>
+Wheter to add the Certificate to the
+<a href="https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux">System&#8217;s CA Trust Store</a>
+by copying the certificate to specific places and using
+<code>update-ca-certificates</code> (Debian) / <code>update-ca-trust</code> (RHEL)
+to integrate them into the store.</p>
 </dd>
 </dl>
 </div>
@@ -876,20 +878,23 @@ Defaults to <code>false</code>.</p>
 <div class="title">Tip</div>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Messed up?
-Try running</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>update-ca-certificates --fresh</code> (Debian/Ubuntu)</p>
-</li>
-</ul>
-</div>
+Messed up / Fucked up? Try setting <code>install_ca_to_system_fresh</code> to <code>true</code>.
 </td>
 </tr>
 </table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">install_ca_to_system_fresh</dt>
+<dd>
+<p>(Debian/Ubuntu ONLY)
+<em>Boolean</em>. Defaults to value of <code>default_force</code> (if existent) or <code>false</code>.<br>
+Invokes <code>update-ca-certificates</code> with <code>--fresh</code>
+to remove symlinks in /etc/ssl/certs directory
+(<em>before completely resourcing the directory using the configured CA directories and settings</em>).
+This thus purges dead / potentially wrong or conflicting certificates.</p>
+</dd>
+</dl>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -1811,7 +1816,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-23 11:43:17 UTC
+Last updated 2022-06-23 22:21:32 UTC
 </div>
 </div>
 </body>
