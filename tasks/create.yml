@@ -186,7 +186,7 @@
       ansible.builtin.command:
         cmd: >
           update-ca-certificates --verbose
-          {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}"
+          {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}
         creates: "/etc/ssl/certs/{{ item.filename }}.pem"
       notify: restart httpd
   when: item.install_ca_to_system | default(false)
