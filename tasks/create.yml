@@ -187,7 +187,8 @@
         cmd: >
           update-ca-certificates --verbose
           {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}
-        creates: "/etc/ssl/certs/{{ item.filename }}.pem"
+        # creates: "/etc/ssl/certs/{{ item.filename }}.pem"
+      changed_when: false
       notify: restart httpd
   when: item.install_ca_to_system | default(false) and ansible_os_family == 'Debian'
 
@@ -223,7 +224,8 @@
       become: true
       ansible.builtin.command:
         cmd: update-ca-trust
-        creates: "/etc/pki/tls/certs/{{ item.filename }}.pem"
+        # creates: "/etc/pki/tls/certs/{{ item.filename }}.pem"
+      changed_when: false
       notify: restart httpd
 
   when: item.install_ca_to_system | default(false) and ansible_os_family == 'RedHat'
