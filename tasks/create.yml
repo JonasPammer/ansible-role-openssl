@@ -215,10 +215,6 @@
         owner: "root"
         group: "root"
         mode: u=rw,g=r,o=r
-    
-    # Needed for RHEL6 as per Note in Step 5 of https://access.redhat.com/solutions/1549003
-    - name: Run command to enable the dynamic CA configuration feature (RHEL).
-      ansible.builtin.command: update-ca-trust enable
 
     - name: Run command to rebuild the Systems CA-trust database (RHEL).
       become: true
