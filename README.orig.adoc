@@ -103,19 +103,23 @@ filename (Required)::
 Name used for every file.
 
 install_ca_to_system::
-(Debian/Ubuntu ONLY)
-Whether to install the CA to `/etc/ssl/certs/ca-certificates.crt` using `update-ca-certificates`
-as described in https://superuser.com/a/719047[this superuser answer].
-Defaults to `false`.
+_Boolean_. Defaults to `false`. +
+Wheter to add the Certificate to the 
+https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux[System's CA Trust Store]
+by copying the certificate to specific places and using
+`update-ca-certificates` (Debian) / `update-ca-trust` (RHEL) 
+to integrate them into the store.
 
 [TIP]
-====
-// Fucked up
-Messed up?
-Try running
+Messed up / Fucked up? Try setting `install_ca_to_system_fresh` to `true`.
 
-* `update-ca-certificates --fresh` (Debian/Ubuntu)
-====
+install_ca_to_system_fresh::
+(Debian/Ubuntu ONLY)
+_Boolean_. Defaults to value of `default_force` (if existent) or `false`. +
+Invokes `update-ca-certificates` with `--fresh` 
+to remove symlinks in /etc/ssl/certs directory
+(_before completely resourcing the directory using the configured CA directories and settings_).
+This thus purges dead / potentially wrong or conflicting certificates.
 
 
 =====

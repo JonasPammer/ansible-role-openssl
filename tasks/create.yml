@@ -171,17 +171,17 @@
 
 # as described https://superuser.com/a/719047
 - block:
-    - name: Copy Self Signed OpenSSL certificate to '/usr/local/share/ca-certificates/…'.
+    - name: Copy Self Signed OpenSSL certificate to '/usr/local/share/ca-certificates/…' (Debian).
       become: true
       ansible.builtin.copy:
-        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt" # MUST be .crt to be recognized by command
         remote_src: true
         dest: "/usr/local/share/ca-certificates/{{ item.filename }}.crt"
         owner: "root"
         group: "root"
         mode: u=rw,g=r,o=r
 
-    - name: Run command to create CA-Certificate-File in system directory '/etc/ssl/certs/…' (when it does not exist).
+    - name: Run command to rebuild the Systems CA-trust database (Debian).
       become: true
       ansible.builtin.command:
         cmd: >
@@ -189,4 +189,41 @@
           {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}
         creates: "/etc/ssl/certs/{{ item.filename }}.pem"
       notify: restart httpd
-  when: item.install_ca_to_system | default(false)
+  when: item.install_ca_to_system | default(false) and ansible_os_family == 'Debian'
+
+- block:
+    - name: Install 'ca-certificates' package (RHEL).
+      ansible.builtin.package:
+        name: ca-certificates
+        state: present
+
+    # as per https://manned.org/man/centos-8.5/update-ca-trust
+    # "In the anchors subdirectories /usr/share/pki/ca-trust-source/anchors/ or /etc/pki/ca-trust/source/anchors/ 
+    #  you may install one or multiple certificates in either the DER file format or in the PEM (BEGIN/END CERTIFICATE) file format. 
+    #  Each certificate will be treated as trusted for all purposes. "
+    # as per https://stackoverflow.com/a/56520218
+    # "Note that all trust settings available in the /usr/share/pki/ca-trust-source/anchors/ directory 
+    #  are interpreted with a lower priority compared to the ones placed under the /etc/pki/ca-trust/source/anchors/ directory 
+    #  which may be in the extended BEGIN TRUSTED file format."
+    - name: Copy Self Signed OpenSSL certificate to simple trust anchors directory '/usr/share/pki/ca-trust-source/anchors/…' (RHEL).
+      become: true
+      ansible.builtin.copy:
+        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt"
+        remote_src: true
+        dest: "/usr/share/pki/ca-trust-source/anchors/{{ item.filename }}.crt"
+        owner: "root"
+        group: "root"
+        mode: u=rw,g=r,o=r
+    
+    # Needed for RHEL6 as per Note in Step 5 of https://access.redhat.com/solutions/1549003
+    - name: Run command to enable the dynamic CA configuration feature (RHEL).
+      ansible.builtin.command: update-ca-trust enable
+
+    - name: Run command to rebuild the Systems CA-trust database (RHEL).
+      become: true
+      ansible.builtin.command:
+        cmd: update-ca-trust
+        creates: "/etc/pki/tls/certs/{{ item.filename }}.pem"
+      notify: restart httpd
+
+  when: item.install_ca_to_system | default(false) and ansible_os_family == 'RedHat'
