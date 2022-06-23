@@ -4,8 +4,19 @@
 
   vars:
     openssl_items:
-      - filename: jonaspammer_at
-        csr_common_name: jonaspammer.at
+      # as per minimum viable playbook example:
+      - filename: mvp_jonaspammer_at
+        csr_common_name: mvp.jonaspammer.at
+      # as per common playbook example:
+      - filename: common_jonaspammer_at
+        csr_common_name: common.jonaspammer.at
+        csr_country_name: "AT"
+        csr_state_or_province_name: "Vorarlberg"
+        csr_locality_name: "Bregenz"
+        csr_email_address: "opensource@jonaspammer.at"
+
+        privatekey_backup: true
+        install_ca_to_system: true
 
   roles:
     - role: "ansible-role-openssl"
