@@ -15,21 +15,33 @@
   tasks:
     - name: get md5 hash of crt
       ansible.builtin.shell: >
-        openssl x509 -noout -modulus -in "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
-          | openssl md5 | grep "stdin" | sed 's/^.* //'
+        set -o pipefail;
+        openssl x509 -noout -modulus -in "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt" |
+          openssl md5 | grep "stdin" | sed 's/^.* //'
+      args:
+        executable: /bin/bash
       register: openssl__register_shell_md5_crt
+      changed_when: false
 
     - name: get md5 hash of key
       ansible.builtin.shell: >
-        openssl rsa -noout -modulus -in "{{ openssl_key_directory }}/{{ openssl_items[0].filename }}.key"
-          | openssl md5 | grep "stdin" | sed 's/^.* //'
+        set -o pipefail;
+        openssl rsa -noout -modulus -in "{{ openssl_key_directory }}/{{ openssl_items[0].filename }}.key" |
+          openssl md5 | grep "stdin" | sed 's/^.* //'
+      args:
+        executable: /bin/bash
       register: openssl__register_shell_md5_key
+      changed_when: false
 
     - name: get md5 hash of csr
       ansible.builtin.shell: >
-        openssl req -noout -modulus -in "{{ openssl_csr_directory }}/{{ openssl_items[0].filename }}.csr"
-          | openssl md5 | grep "stdin" | sed 's/^.* //'
+        set -o pipefail;
+        openssl req -noout -modulus -in "{{ openssl_csr_directory }}/{{ openssl_items[0].filename }}.csr" |
+          openssl md5 | grep "stdin" | sed 's/^.* //'
+      args:
+        executable: /bin/bash
       register: openssl__register_shell_md5_csr
+      changed_when: false
 
     - name: Assert that openssl md5 hash of every file matches.
       ansible.builtin.assert:
