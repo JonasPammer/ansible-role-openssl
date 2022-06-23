@@ -18,7 +18,7 @@
     extra_args: "{{ '--prefer-binary' if openssl_cryptography_prefer_binary else '' }}"
   environment:
     CRYPTOGRAPHY_DONT_BUILD_RUST: "{{ '1' if openssl_cryptography_build_rust else '0' }}"
-  ignore_errors: true
+  ignore_errors: true # noqa ignore-errors
   register: openssl__register_pip_install_prefer_binary
 
 - name: Install pip packages without '--prefer-binary' (when '--prefer-binary' is enabled but failed).
@@ -26,7 +26,7 @@
     name: "{{ openssl__pip_packages }}"
   environment:
     CRYPTOGRAPHY_DONT_BUILD_RUST: "{{ '1' if openssl_cryptography_build_rust else '0' }}"
-  ignore_errors: true
+  ignore_errors: true # noqa ignore-errors
   when: openssl_cryptography_prefer_binary and openssl__register_pip_install_prefer_binary.failed
 
 - name: Create key directory.
