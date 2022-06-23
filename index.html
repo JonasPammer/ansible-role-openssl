@@ -1187,6 +1187,7 @@ which sources its soft dependencies from <code>requirements.yml</code>:</p>
 
   <span class="na">roles</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">jonaspammer.bootstrap</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">jonaspammer.pip</span>
     <span class="c1">#    - role: jonaspammer.core_dependencies</span></code></pre>
 </div>
 </div>
@@ -1202,8 +1203,12 @@ as well as the recursive tree of their soft dependencies.</p>
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 1. Minimum Viable Play</div>
+<div class="title">Example 1. Minimum Viable Play / OpenSSL Item</div>
 <div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The following play:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="yaml"><span class="na">roles</span><span class="pi">:</span>
@@ -1215,6 +1220,105 @@ as well as the recursive tree of their soft dependencies.</p>
     <span class="pi">-</span> <span class="na">filename</span><span class="pi">:</span> <span class="s">jonaspammer_at</span>
       <span class="na">csr_common_name</span><span class="pi">:</span> <span class="s">jonaspammer.at</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>creates the following files (on Debian):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>root@instance-py3-ansible-5-ubuntu1604:/# ls -l /etc/ssl/private/ # openssl_key_directory
+total 16
+-rw------- 1 root root 3243 Jun 23 09:37 jonaspammer_at.key
+-rw-r----- 1 root root 5031 Jun 23 09:37 jonaspammer_at.keycrt
+-rw-r----- 1 root root 4024 Jun 23 09:37 jonaspammer_at.p12
+
+root@instance-py3-ansible-5-ubuntu1604:/# ls -l /etc/ssl/misc # openssl_csr_directory
+total 4
+-rw-r--r-- 1 root root 1651 Jun 23 09:37 jonaspammer_at.csr
+
+root@instance-py3-ansible-5-ubuntu1604:/# ls -l /etc/ssl/certs # openssl_crt_directory
+total 580
+lrwxrwxrwx 1 root root     49 Sep 19  2021 01419da9.0 -&gt; Microsoft_ECC_Root_Certificate_Authority_2017.pem
+lrwxrwxrwx 1 root root     45 Sep 19  2021 02265526.0 -&gt; Entrust_Root_Certification_Authority_-_G2.pem
+…
+-rw-r--r-- 1 root root   1789 Jun 23 09:37 jonaspammer_at.crt
+…
+
+# Below commands as seen in https://www.xolphin.com/support/OpenSSL/Frequently_used_OpenSSL_Commands
+
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl x509 -text -noout -in certs/jonaspammer_at.crt
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            0a:03:4d:1e:db:b5:48:d2:13:d8:1c:d5:28:46:41:1d:7c:1c:f1:7f
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=jonaspammer.at
+        Validity
+            Not Before: Jun 23 09:37:25 2022 GMT
+            Not After : Jun 20 09:37:25 2032 GMT
+        Subject: CN=jonaspammer.at
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (4096 bit)
+                Modulus:
+                    00:cf:62:15:5b:cb:3e:3a:7c:3a:9b:5e:5e:47:37:
+                    ………
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Alternative Name:
+                DNS:jonaspammer.at
+            X509v3 Subject Key Identifier:
+                6C:5E:12:CE:E1:98:4C:F1:B4:74:4E:AB:C4:1E:93:15:69:79:72:3B
+    Signature Algorithm: sha256WithRSAEncryption
+         21:f6:11:83:83:15:01:62:e2:78:8e:78:44:cd:0e:8c:01:00:
+         ………
+
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl req -text -noout -verify -in misc/jonaspammer_at.csr
+verify OK
+Certificate Request:
+    Data:
+        Version: 0 (0x0)
+        Subject: CN=jonaspammer.at
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (4096 bit)
+                Modulus:
+                    00:cf:62:15:5b:cb:3e:3a:7c:3a:9b:5e:5e:47:37:
+                    ………
+                Exponent: 65537 (0x10001)
+        Attributes:
+        Requested Extensions:
+            X509v3 Subject Alternative Name:
+                DNS:jonaspammer.at
+    Signature Algorithm: sha256WithRSAEncryption
+         81:09:f3:cf:55:3c:ef:2f:6c:b7:5e:cd:64:d0:66:f5:1d:d4:
+         ………
+
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl rsa -noout -in private/jonaspammer_at.key -check
+RSA key ok
+
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl pkcs12 -noout -info -in private/jonaspammer_at.p12
+Enter Import Password:
+MAC Iteration 1
+MAC verified OK
+PKCS7 Data
+Certificate bag
+PKCS7 Data
+Key bag
+
+# Checking the MD5 hash of the public key to check if it is equal to what is in the CSR or private key.
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl x509 -noout -modulus -in certs/jonaspammer_at.crt | openssl md5
+-in private/jonaspammer_at.key | openssl md5
+opens(stdin)= da1f0a7e379330443660f098bfb64043
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl rsa -noout -modulus -in private/jonaspammer_at.key | openssl md5
+sl req -noout -modulus -in misc/jonaspammer_at.csr(stdin)= da1f0a7e379330443660f098bfb64043
+root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl req -noout -modulus -in misc/jonaspammer_at.csr | openssl md5
+(stdin)= da1f0a7e379330443660f098bfb64043</pre>
+</div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1707,7 +1811,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-14 11:13:42 UTC
+Last updated 2022-06-23 11:43:17 UTC
 </div>
 </div>
 </body>
