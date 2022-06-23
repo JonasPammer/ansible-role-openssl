@@ -21,6 +21,7 @@
     - role: "ansible-role-openssl" # actually needed for vars only
 
   tasks:
+    ## Simple Certificate Checks ##
     - name: get md5 hash of crt
       ansible.builtin.shell: >
         set -o pipefail;
@@ -57,3 +58,21 @@
           - >
             (openssl__register_shell_md5_crt.stdout == openssl__register_shell_md5_key.stdout) and
             (openssl__register_shell_md5_crt.stdout == openssl__register_shell_md5_csr.stdout)
+
+    - name: Get parsed information of generated certificate using x509_certificate_info.
+      community.crypto.x509_certificate_info:
+        path: "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
+        valid_at:
+          point_1: "+3649d"
+          point_2: "+3651d"
+      register: openssl__register_x509certificateinfo
+
+    - name: dump information
+      ansible.builtin.debug:
+        var: openssl__register_x509certificateinfo
+
+    - name: Validate that certificate is valid tomorrow, but not in three weeks
+      assert:
+        that:
+          - openssl__register_x509certificateinfo.valid_at.point_1
+          - not openssl__register_x509certificateinfo.valid_at.point_2
