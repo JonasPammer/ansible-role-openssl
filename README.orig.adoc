@@ -104,13 +104,11 @@ Name used for every file.
 
 install_ca_to_system::
 _Boolean_. Defaults to `false`. +
-Wheter to add the Certificate to the
-https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux[System's CA Trust Store]
-by copying the certificate to specific places and using
-`update-ca-certificates` (Debian) / `update-ca-trust` (RHEL)
-to integrate them into the store.
+Whether to execute steps to integrate the self signed certificate to the
+https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux[System's CA Trust Store].
 
 [TIP]
+(Debian/Ubuntu ONLY)
 Messed up / Fucked up? Try setting `install_ca_to_system_fresh` to `true`.
 
 install_ca_to_system_fresh::
