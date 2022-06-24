@@ -94,7 +94,6 @@
       register: openssl__register_command_openssl_verify_simple
       changed_when: false
       failed_when: openssl__register_command_openssl_verify_simple.failed
-
 #    # TODO
 #    - name: Check if openssl verify is NOT OK for simple certificate
 #      ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"

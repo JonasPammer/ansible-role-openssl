@@ -199,12 +199,12 @@
         state: present
 
     # as per https://manned.org/man/centos-8.5/update-ca-trust
-    # "In the anchors subdirectories /usr/share/pki/ca-trust-source/anchors/ or /etc/pki/ca-trust/source/anchors/ 
-    #  you may install one or multiple certificates in either the DER file format or in the PEM (BEGIN/END CERTIFICATE) file format. 
+    # "In the anchors subdirectories /usr/share/pki/ca-trust-source/anchors/ or /etc/pki/ca-trust/source/anchors/
+    #  you may install one or multiple certificates in either the DER file format or in the PEM (BEGIN/END CERTIFICATE) file format.
     #  Each certificate will be treated as trusted for all purposes. "
     # as per https://stackoverflow.com/a/56520218
-    # "Note that all trust settings available in the /usr/share/pki/ca-trust-source/anchors/ directory 
-    #  are interpreted with a lower priority compared to the ones placed under the /etc/pki/ca-trust/source/anchors/ directory 
+    # "Note that all trust settings available in the /usr/share/pki/ca-trust-source/anchors/ directory
+    #  are interpreted with a lower priority compared to the ones placed under the /etc/pki/ca-trust/source/anchors/ directory
     #  which may be in the extended BEGIN TRUSTED file format."
     - name: Copy Self Signed OpenSSL certificate to simple trust anchors directory '/usr/share/pki/ca-trust-source/anchors/…' (RHEL).
       become: true
