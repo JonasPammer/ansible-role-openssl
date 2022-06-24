@@ -3,7 +3,8 @@
 # (tl;dr: almost not overwrite-able variables)
 
 _openssl__requirements:
-  default: []
+  default:
+    - openssl
   Alpine:
     - rust
     - cargo
