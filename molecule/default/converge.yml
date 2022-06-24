@@ -5,8 +5,8 @@
   vars:
     openssl_items:
       # as per minimum viable playbook example:
-      - filename: mvp_jonaspammer_at
-        csr_common_name: mvp.jonaspammer.at
+      - filename: mvp_simple_at
+        csr_common_name: mvp.simple.at
       # as per common playbook example:
       - filename: common_jonaspammer_at
         csr_common_name: common.jonaspammer.at

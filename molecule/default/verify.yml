@@ -15,8 +15,8 @@
   vars:
     openssl_items:
       # as per minimum viable playbook example:
-      - filename: mvp_jonaspammer_at
-        csr_common_name: mvp.jonaspammer.at
+      - filename: mvp_simple_at
+        csr_common_name: mvp.simple.at
       # as per common playbook example:
       - filename: common_jonaspammer_at
         csr_common_name: common.jonaspammer.at
@@ -94,9 +94,9 @@
       register: openssl__register_command_openssl_verify_simple
       changed_when: false
       failed_when: openssl__register_command_openssl_verify_simple.failed
-#    # TODO
-#    - name: Check if openssl verify is NOT OK for simple certificate
-#      ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
-#      register: openssl__register_command_openssl_verify_simple
-#      changed_when: false
-#      failed_when: not openssl__register_command_openssl_verify_simple.failed
+
+    - name: Check if openssl verify is NOT OK for simple certificate
+      ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
+      register: openssl__register_command_openssl_verify_simple
+      changed_when: false
+      failed_when: not openssl__register_command_openssl_verify_simple.failed
