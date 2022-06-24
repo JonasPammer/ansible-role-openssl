@@ -863,11 +863,8 @@ but also fills-in variables on its own (e.g. relative ones like <code>privatekey
 <dt class="hdlist1">install_ca_to_system</dt>
 <dd>
 <p><em>Boolean</em>. Defaults to <code>false</code>.<br>
-Wheter to add the Certificate to the
-<a href="https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux">System&#8217;s CA Trust Store</a>
-by copying the certificate to specific places and using
-<code>update-ca-certificates</code> (Debian) / <code>update-ca-trust</code> (RHEL)
-to integrate them into the store.</p>
+Whether to execute steps to integrate the self signed certificate to the
+<a href="https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux">System&#8217;s CA Trust Store</a>.</p>
 </dd>
 </dl>
 </div>
@@ -878,6 +875,7 @@ to integrate them into the store.</p>
 <div class="title">Tip</div>
 </td>
 <td class="content">
+(Debian/Ubuntu ONLY)
 Messed up / Fucked up? Try setting <code>install_ca_to_system_fresh</code> to <code>true</code>.
 </td>
 </tr>
@@ -1816,7 +1814,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-24 07:44:16 UTC
+Last updated 2022-06-24 08:17:16 UTC
 </div>
 </div>
 </body>
