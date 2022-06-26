@@ -10,7 +10,17 @@ Jonas Pammer <opensource@jonaspammer.at>;
 https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml/badge.svg[Testing CI]]
 
 
-An Ansible role for generating OpenSSL Certificate Files.
+An Ansible role for generating OpenSSL/x509 Certificate Files
+(privatekey, csr, certificate, pkcs12).
+
+This role is a wrapper for all related community.crypto modules. It...
+
+* prepares the system by installing packages
+* defines and uses system-specific default openssl directories (see `/vars`)
+* ensures said directories exist with correct permissions
+* provides ability of shared defaults (e.g. `item.default_backup`)
+* makes yourself DRY (i.e. by doing `x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase ...` etc)
+* offers the ability to install the certificate to https://serverfault.com/a/722646[the Systems CA-trust database] if enabled (see <<install_ca_to_system>>).
 
 
 toc::[]
