@@ -667,7 +667,33 @@ pre.rouge {
 <p><a href="https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml"><span class="image"><img src="https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml/badge.svg" alt="Testing CI"></span></a></p>
 </div>
 <div class="paragraph">
-<p>An Ansible role for generating OpenSSL Certificate Files.</p>
+<p>An Ansible role for generating OpenSSL/x509 Certificate Files
+(privatekey, csr, certificate, pkcs12).</p>
+</div>
+<div class="paragraph">
+<p>This role is a wrapper for all related community.crypto modules. It&#8230;&#8203;</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>prepares the system by installing packages</p>
+</li>
+<li>
+<p>defines and uses system-specific default openssl directories (see <code>/vars</code>)</p>
+</li>
+<li>
+<p>ensures said directories exist with correct permissions</p>
+</li>
+<li>
+<p>provides ability of shared defaults (e.g. <code>item.default_backup</code>)</p>
+</li>
+<li>
+<p>makes yourself DRY (i.e. by doing <code>x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase &#8230;&#8203;</code> etc)</p>
+</li>
+<li>
+<p>offers the ability to install the certificate to <a href="https://serverfault.com/a/722646">the Systems CA-trust database</a> if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
+</li>
+</ul>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
@@ -1814,7 +1840,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-24 08:17:16 UTC
+Last updated 2022-06-26 21:30:57 UTC
 </div>
 </div>
 </body>
