@@ -89,14 +89,16 @@
           - not openssl__register_x509certificateinfo.valid_at.point_2
 
     ## Check install_ca_to_system ##
+    # TODO this command does not seem to do or check for what I want to check for.
+    #      find command to check if crt is trusted by system ca store (and thus by curl and others)
     - name: Check if openssl verify is OK for installed-to-system certificate
       ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[1].filename }}.crt"
       register: openssl__register_command_openssl_verify_simple
       changed_when: false
       failed_when: openssl__register_command_openssl_verify_simple.failed
 
-    - name: Check if openssl verify is NOT OK for simple certificate
-      ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
-      register: openssl__register_command_openssl_verify_simple
-      changed_when: false
-      failed_when: not openssl__register_command_openssl_verify_simple.failed
+    # - name: Check if openssl verify is NOT OK for simple certificate
+    #   ansible.builtin.command: openssl verify "{{ openssl_crt_directory }}/{{ openssl_items[0].filename }}.crt"
+    #   register: openssl__register_command_openssl_verify_simple
+    #   changed_when: false
+    #   failed_when: not openssl__register_command_openssl_verify_simple.failed
