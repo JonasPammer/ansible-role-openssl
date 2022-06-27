@@ -688,10 +688,11 @@ pre.rouge {
 <p>provides ability of shared defaults (e.g. <code>item.default_backup</code>)</p>
 </li>
 <li>
-<p>makes yourself DRY (i.e. by doing <code>x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase &#8230;&#8203;</code> etc)</p>
+<p>makes yourself DRY (i.e. by doing <code>x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase &#8230;&#8203;</code>)</p>
 </li>
 <li>
-<p>offers the ability to install the certificate to <a href="https://serverfault.com/a/722646">the Systems CA-trust database</a> if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
+<p>offers the ability to install the certificate to the Systems CA-trust store (<a href="#openssl__system_ca_store_file"><code>openssl__system_ca_store_file</code></a>)
+if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
 </li>
 </ul>
 </div>
@@ -886,11 +887,15 @@ but also fills-in variables on its own (e.g. relative ones like <code>privatekey
 <dd>
 <p>Name used for every file.</p>
 </dd>
+</dl>
+</div>
+<div id="install_ca_to_system" class="dlist">
+<dl>
 <dt class="hdlist1">install_ca_to_system</dt>
 <dd>
 <p><em>Boolean</em>. Defaults to <code>false</code>.<br>
 Whether to execute steps to integrate the self signed certificate to the
-<a href="https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux">System&#8217;s CA Trust Store</a>.</p>
+the System&#8217;s CA Trust Store (<a href="#openssl__system_ca_store_file"><code>openssl__system_ca_store_file</code></a>).</p>
 </dd>
 </dl>
 </div>
@@ -1177,6 +1182,15 @@ using <a href="https://docs.ansible.com/ansible/2.9/modules/openssl_certificate_
 <p>Each variable listed in this section
 is dynamically defined when executing this role (and can only be overwritten using <code>ansible.builtin.set_facts</code>) <em>and</em>
 is meant to be used not just internally.</p>
+</div>
+<div id="openssl__system_ca_store_file" class="sidebarblock">
+<div class="content">
+<div class="title"><code>openssl__system_ca_store_file</code></div>
+<div class="paragraph">
+<p>Location of the System&#8217;s trusted CA Certificate Store/Bundle File.
+As per <a href="https://serverfault.com/a/722646" class="bare">https://serverfault.com/a/722646</a></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1840,7 +1854,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-26 21:30:57 UTC
+Last updated 2022-06-27 08:13:44 UTC
 </div>
 </div>
 </body>
