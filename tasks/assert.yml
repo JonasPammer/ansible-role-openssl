@@ -5,7 +5,7 @@
     - name: test if 'openssl_items' is a list
       ansible.builtin.assert:
         that:
-          - openssl_items | type_debug in ["list"]
+          - openssl_items is iterable
         quiet: true
     - name: test if each item of 'openssl_items' has most-necessary values defined
       ansible.builtin.assert:
