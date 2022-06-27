@@ -422,6 +422,26 @@ image:https://raw.githubusercontent.com/JonasPammer/ansible-roles/master/graphs/
 requirements.yml dependency graph of jonaspammer.openssl]
 ====
 
+.Common Play / OpenSSL Item
+====
+----
+roles:
+  - jonaspammer.openssl
+
+vars:
+  - filename: common_jonaspammer_at
+    csr_common_name: common.jonaspammer.at
+    csr_country_name: "AT"
+    csr_state_or_province_name: "Vorarlberg"
+    csr_locality_name: "Bregenz"
+    csr_email_address: "opensource@jonaspammer.at"
+
+    privatekey_backup: true
+    install_ca_to_system: true
+----
+====
+
+
 .Minimum Viable Play / OpenSSL Item
 ====
 * The following play:
@@ -429,7 +449,6 @@ requirements.yml dependency graph of jonaspammer.openssl]
 [source,yaml]
 ----
 roles:
-  - jonaspammer.pip
   - jonaspammer.openssl
 
 vars:
@@ -532,7 +551,6 @@ root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl req -noout -modulus -in
 (stdin)= da1f0a7e379330443660f098bfb64043
 ----
 ====
-
 
 [[development]]
 == 📝 Development
