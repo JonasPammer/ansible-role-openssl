@@ -37,6 +37,21 @@ _openssl_crt_directory:
   Rocky: *redhat_crt_directory
   Suse: /etc/ssl/certs
 
+# https://serverfault.com/a/722646
+_openssl__system_ca_store_file:
+  Debian: "/etc/ssl/certs/ca-certificates.crt"
+  RedHat_6: "/etc/pki/tls/certs/ca-bundle.crt"
+  Suse: "/etc/ssl/ca-bundle.pem"
+  RedHat: "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem" # 7
+  Alpine: "/etc/ssl/cert.pem"
+
+openssl__system_ca_store_file: "{{
+  _openssl__system_ca_store_file[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
+  _openssl__system_ca_store_file[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
+  _openssl__system_ca_store_file[ansible_distribution])|default(
+  _openssl__system_ca_store_file[ansible_os_family])|default(
+  _openssl__system_ca_store_file['default']) }}"
+
 openssl__requirements: "{{
   _openssl__requirements[ansible_distribution ~ '_' ~ ansible_distribution_major_version]|default(
   _openssl__requirements[ansible_os_family ~ '_' ~ ansible_distribution_major_version])|default(
