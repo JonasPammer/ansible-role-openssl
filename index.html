@@ -1246,7 +1246,29 @@ as well as the recursive tree of their soft dependencies.</p>
 </table>
 </div>
 <div class="exampleblock">
-<div class="title">Example 1. Minimum Viable Play / OpenSSL Item</div>
+<div class="title">Example 1. Common Play / OpenSSL Item</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>roles:
+  - jonaspammer.openssl
+
+vars:
+  - filename: common_jonaspammer_at
+    csr_common_name: common.jonaspammer.at
+    csr_country_name: "AT"
+    csr_state_or_province_name: "Vorarlberg"
+    csr_locality_name: "Bregenz"
+    csr_email_address: "opensource@jonaspammer.at"
+
+    privatekey_backup: true
+    install_ca_to_system: true</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="title">Example 2. Minimum Viable Play / OpenSSL Item</div>
 <div class="content">
 <div class="ulist">
 <ul>
@@ -1255,7 +1277,6 @@ as well as the recursive tree of their soft dependencies.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="yaml"><span class="na">roles</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">jonaspammer.pip</span>
   <span class="pi">-</span> <span class="s">jonaspammer.openssl</span>
 
 <span class="na">vars</span><span class="pi">:</span>
@@ -1854,7 +1875,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-27 08:13:44 UTC
+Last updated 2022-06-27 08:20:28 UTC
 </div>
 </div>
 </body>
