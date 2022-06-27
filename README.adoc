@@ -19,8 +19,9 @@ This role is a wrapper for all related community.crypto modules. It...
 * defines and uses system-specific default openssl directories (see `/vars`)
 * ensures said directories exist with correct permissions
 * provides ability of shared defaults (e.g. `item.default_backup`)
-* makes yourself DRY (i.e. by doing `x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase ...` etc)
-* offers the ability to install the certificate to https://serverfault.com/a/722646[the Systems CA-trust database] if enabled (see <<install_ca_to_system>>).
+* makes yourself DRY (i.e. by doing `x509_certificate.privatekey_passphrase: "{{ item.privatekey_passphrase ...`)
+* offers the ability to install the certificate to the Systems CA-trust store (<<openssl__system_ca_store_file>>)
+  if enabled (see <<install_ca_to_system>>).
 
 
 toc::[]
@@ -142,10 +143,11 @@ but also fills-in variables on its own (e.g. relative ones like `privatekey_path
 filename (Required)::
 Name used for every file.
 
+[[install_ca_to_system]]
 install_ca_to_system::
 _Boolean_. Defaults to `false`. +
 Whether to execute steps to integrate the self signed certificate to the
-https://serverfault.com/questions/62496/ssl-certificate-location-on-unix-linux[System's CA Trust Store].
+the System's CA Trust Store (<<openssl__system_ca_store_file>>).
 
 [TIP]
 (Debian/Ubuntu ONLY)
@@ -368,6 +370,13 @@ This directory stores public, persistent objects (`crt`).
 Each variable listed in this section
 is dynamically defined when executing this role (and can only be overwritten using `ansible.builtin.set_facts`) _and_
 is meant to be used not just internally.
+
+[[openssl__system_ca_store_file]]
+.`openssl__system_ca_store_file`
+****
+Location of the System's trusted CA Certificate Store/Bundle File.
+As per https://serverfault.com/a/722646
+****
 
 
 [[dependencies]]
