@@ -169,12 +169,12 @@
       {{ openssl_certifcate.content | b64decode | trim }}
     mode: u=rw,g=r,o=
 
-# as described https://superuser.com/a/719047
+# as described https://ubuntu.com/server/docs/security-trust-store
 - block:
     - name: Create symlink of Self Signed OpenSSL certificate to '/usr/local/share/ca-certificates/…' (Debian).
       become: true
       ansible.builtin.file:
-        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt" # MUST be .crt to be recognized by command
+        src: "{{ openssl_crt_directory }}/{{ item.filename }}.crt" # MUST be a `.crt` in PEM form to be recognized
         dest: "/usr/local/share/ca-certificates/{{ item.filename }}.crt"
         state: link
         owner: "root"
