@@ -5,8 +5,6 @@ permissions:
   contents: write
 "on":
   push:
-    branches:
-      - master
     paths:
       - ".github/workflows/gh-pages.yml"
       - "meta/main.yml"
@@ -45,9 +43,10 @@ jobs:
       - name: Generate HTML
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (when branch is master)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./docs/
+        if: github.ref == 'refs/heads/master'

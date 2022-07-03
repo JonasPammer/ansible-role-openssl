@@ -1,5 +1,6 @@
 ---
 # tasks file for testing that variables of ansible-role jonaspammer.openssl are set correctly
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_tests.html
 
 - block:
     - name: test if 'openssl_items' is a list
