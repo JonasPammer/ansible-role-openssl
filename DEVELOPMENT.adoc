@@ -98,6 +98,26 @@ root@instance-py3-ansible-2:/# python3 --version
 Python 3.8.10
 root@instance-py3-ansible-2:/# ...
 ----
++
+[TIP]
+====
+If the failure you try to debug is part of `verify.yml` step and not the actual `converge.yml`,
+you may want to know that the output of ansible's modules (`vars`), hosts (`hostvars`) and environment variables have been stored into files
+on both the provisioner and inside the docker machine under:
+* `/var/tmp/vars.yml`
+* `/var/tmp/hostvars.yml`
+* `/var/tmp/environment.yml`
+`grep`, `cat` or transfer these as you wish!
+====
++
+[TIP]
+=====
+You may also want to know that the files mentioned in the admonition above
+are attached to the *GitHub CI Artifacts* of a given Workflow run. +
+This allows one to check the difference between runs
+and thus help in debugging what caused the bit-rot or failure in general.
+image::https://user-images.githubusercontent.com/32995541/178442403-e15264ca-433a-4bc7-95db-cfadb573db3c.png[]
+=====
 
 4. After you finished your debugging, exit it and destroy the container:
 +
