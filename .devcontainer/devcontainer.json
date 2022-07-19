@@ -11,27 +11,28 @@
   "settings": {},
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
+    // ## General / GUI ##
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "mhutchie.git-graph",
+    "Gruntfuggly.todo-tree",
+    "aaron-bond.better-comments",
+    "asciidoctor.asciidoctor-vscode",
+    "ms-azuretools.vscode-docker",
+    "mutantdino.resourcemonitor",
+
     // ## Ansible Development ##
     "redhat.ansible",
     "redhat.vscode-yaml",
     "wholroyd.jinja",
-    "samuelcolvin.jinjahtml",
-
-    // ## General ##
-    "ms-azuretools.vscode-docker",
-    "asciidoctor.asciidoctor-vscode",
-    "Gruntfuggly.todo-tree",
-    "eamodio.gitlens",
-    "donjayamanne.githistory",
-    "mhutchie.git-graph"
-    // "mutantdino.resourcemonitor"
+    "samuelcolvin.jinjahtml"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "docker --version",
+  "postCreateCommand": "/bin/bash -ic 'source /home/vscode/postCreateCommand.sh'",
 
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode",

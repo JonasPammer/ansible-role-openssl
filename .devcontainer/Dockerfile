@@ -38,13 +38,34 @@ CMD [ "sleep", "infinity" ]
 
 ########################
 ### OWN INSTRUCTIONS ###
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends python3 python3-pip python3-setuptools \
-    && python3 -m pip install --upgrade pip && python3 -m pip install tox
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get -qy update \
+    && apt-get -qy upgrade \
+    && apt-get -qy install --no-install-recommends apt-utils tini \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install shellcheck script to system as needed by pre-commit hook
-ADD https://github.com/koalaman/shellcheck/releases/download/v0.8.0/shellcheck-v0.8.0.linux.x86_64.tar.xz /tmp/shellcheck
-RUN apt-get -y install --no-install-recommends xz-utils \
-    && mkdir -p /tmp/shellcheckd \
-    && tar -xJf /tmp/shellcheck --directory /tmp/shellcheckd \
-    && cp /tmp/shellcheckd/shellcheck-v0.8.0/shellcheck /usr/local/bin/
+RUN apt-get -qy update \
+    && apt-get -qqy install --no-install-recommends python3-pip python3-wheel \
+    && python3 -m pip install --no-cache-dir --upgrade pip \
+    && python3 -m pip install --no-cache-dir wheel \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+USER vscode
+RUN git clone --depth=1 https://github.com/Bash-it/bash-it.git /home/vscode/.bash_it && \
+    /home/vscode/.bash_it/install.sh --overwrite-backup --silent
+# `bash-it` is a function. need to go into interactive mode of before-defined USER!
+SHELL ["/bin/bash", "-ic"]
+RUN bash-it enable alias apt bash-it curl docker fuck general git systemd && \
+    bash-it enable completion bash-it defaults dirs docker git github-cli pip3 pipx ssh system && \
+    bash-it enable plugin alias-completion base colors dirs docker explain extract git gitstatus history history-search man python thefuck z_autoenv
+SHELL ["/bin/bash", "-c"]
+
+COPY postCreateCommand.sh /home/vscode/postCreateCommand.sh
+USER root
+RUN chmod u+x /home/vscode/postCreateCommand.sh
+
+USER vscode

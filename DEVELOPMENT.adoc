@@ -30,14 +30,17 @@ https://github.com/JonasPammer/cookiecutter-ansible-role/blob/master/ROLE_DEVELO
 General Ansible Role Development (Best) Practices].
 
 [[versioning]]
-=== 📦 Versioning
+=== 🔢 Versioning
 
 Versions are defined using https://git-scm.com/book/en/v2/Git-Basics-Tagging[Tags],
 which in turn are https://galaxy.ansible.com/docs/contributing/version.html[recognized and used] by Ansible Galaxy.
 
+*Versions must not start with `v`.*
+
 When a new tag is pushed, https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml[
-a GitHub CI workflow] takes care of importing the role to my Ansible Galaxy Account.
-image:https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml/badge.svg[Release CI]
+a GitHub CI workflow]
+(image:https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml/badge.svg[Release CI])
+takes care of importing the role to my Ansible Galaxy Account.
 
 [[testing]]
 === 🧪 Testing

@@ -9,7 +9,8 @@ permissions:
     branches:
       - master
     paths:
-      - ".github/labels.json"
+      - ".github/workflows/issue-label-manager.yml"
+      - ".github/labels.yml"
 
 jobs:
   labels:
@@ -17,8 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: lannonbr/issue-label-manager-action@3.0.0
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: crazy-max/ghaction-github-labeler@v4
+        if: success()
         with:
-          delete: true # will delete any labels that aren't in the .github/labels.json (this is set to false by default)
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          yaml-file: .github/labels.yml
+          skip-delete: false # false -> delete labels that aren't in `yaml-file`
