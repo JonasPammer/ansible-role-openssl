@@ -716,7 +716,7 @@ if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
 <li><a href="#development-system-dependencies">📌 Development Machine Dependencies</a></li>
 <li><a href="#development-dependencies">📌 Development Dependencies</a></li>
 <li><a href="#development-guidelines">ℹ️ Ansible Role Development Guidelines</a></li>
-<li><a href="#versioning">📦 Versioning</a></li>
+<li><a href="#versioning">🔢 Versioning</a></li>
 <li><a href="#testing">🧪 Testing</a></li>
 <li><a href="#development-container-extra">🧃 TIP: Containerized Ideal Development Environment</a></li>
 <li><a href="#cookiecutter">🍪 CookieCutter</a></li>
@@ -1439,15 +1439,19 @@ General Ansible Role Development (Best) Practices</a>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="versioning">📦 Versioning</h3>
+<h3 id="versioning">🔢 Versioning</h3>
 <div class="paragraph">
 <p>Versions are defined using <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">Tags</a>,
 which in turn are <a href="https://galaxy.ansible.com/docs/contributing/version.html">recognized and used</a> by Ansible Galaxy.</p>
 </div>
 <div class="paragraph">
+<p><strong>Versions must not start with <code>v</code>.</strong></p>
+</div>
+<div class="paragraph">
 <p>When a new tag is pushed, <a href="https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml">
-a GitHub CI workflow</a> takes care of importing the role to my Ansible Galaxy Account.
-<span class="image"><img src="https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml/badge.svg" alt="Release CI"></span></p>
+a GitHub CI workflow</a>
+(<span class="image"><img src="https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/release-to-galaxy.yml/badge.svg" alt="Release CI"></span>)
+takes care of importing the role to my Ansible Galaxy Account.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1519,6 +1523,44 @@ root@instance-py3-ansible-2:/# python3 --version
 Python 3.8.10
 root@instance-py3-ansible-2:/# ...</pre>
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the failure you try to debug is part of <code>verify.yml</code> step and not the actual <code>converge.yml</code>,
+you may want to know that the output of ansible&#8217;s modules (<code>vars</code>), hosts (<code>hostvars</code>) and environment variables have been stored into files
+on both the provisioner and inside the docker machine under:
+* <code>/var/tmp/vars.yml</code>
+* <code>/var/tmp/hostvars.yml</code>
+* <code>/var/tmp/environment.yml</code>
+<code>grep</code>, <code>cat</code> or transfer these as you wish!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You may also want to know that the files mentioned in the admonition above
+are attached to the <strong>GitHub CI Artifacts</strong> of a given Workflow run.<br>
+This allows one to check the difference between runs
+and thus help in debugging what caused the bit-rot or failure in general.
+image::https://user-images.githubusercontent.com/32995541/178442403-e15264ca-433a-4bc7-95db-cfadb573db3c.png[]</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
@@ -1875,7 +1917,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-03 16:15:25 UTC
+Last updated 2022-07-19 12:26:35 UTC
 </div>
 </div>
 </body>
