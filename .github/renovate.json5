@@ -1,0 +1,49 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    // explicit version of "config:base" from https://docs.renovatebot.com/presets-config
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimit2",
+    ":prConcurrentLimit10",
+    "group:monorepos",
+    "group:recommended",
+    "workarounds:all",
+
+    // other
+    "schedule:monthly",
+    ":prImmediately",
+    ":rebaseStalePrs",
+
+    ":semanticCommits",
+    ":semanticCommitScope(deps)",
+    "docker:enableMajor",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+
+    ":gitSignOff",
+    ":renovatePrefix",
+  ],
+  configMigration: true,
+  lockFileMaintenance: { enabled: true },
+  stabilityDays: 7,
+
+  labels: ["kind/dependencies"],
+  packageRules: [
+    {
+      matchPackagePatterns: ["eslint"],
+      labels: ["kind/dependencies", "priority/low"],
+    },
+    {
+      matchDepTypes: ["action"],
+      labels: ["kind/dependencies", "kind/infrastructure"],
+    },
+  ],
+  vulnerabilityAlerts: {
+    labels: ["kind/dependencies", "kind/security"],
+  },
+  rebaseLabel: "renovate/rebase",
+  stopUpdatingLabel: "renovate/stop-updating",
+}

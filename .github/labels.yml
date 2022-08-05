@@ -81,3 +81,12 @@
 - name: size/XXL
   color: "ee0000"
   description: "Denotes a PR that changes 1000+ lines, ignoring generated files."
+
+# https://docs.renovatebot.com/configuration-options/#rebaselabel
+- name: renovate/rebase
+  color: "00a9bf" # renovate color
+  description: "Manually request Renovate to recreate/rebase the PR by adding this label."
+# https://docs.renovatebot.com/configuration-options/#stopupdatinglabel
+- name: renovate/stop-updating
+  color: "00a9bf" # renovate color
+  description: "Manually request Renovate to stop updating a PR by adding this label."

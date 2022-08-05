@@ -5,15 +5,6 @@ permissions:
   contents: write
 "on":
   push:
-    paths:
-      - ".github/workflows/gh-pages.yml"
-      - "meta/main.yml"
-      - "CHANGELOG.adoc"
-      - "CODE_OF_CONDUCT.md"
-      - "CONTRIBUTING.adoc"
-      - "DEVELOPMENT.adoc"
-      - "LICENSE"
-      - "README.orig.adoc"
 
 jobs:
   gh-pages:
