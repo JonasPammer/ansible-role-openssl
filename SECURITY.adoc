@@ -1,0 +1,72 @@
+// generated using https://mailtolink.me/ from textblock found in this document
+:mailtolink: mailto:opensource@jonaspammer.at?body=%23%23%20Severity%0D%0A_One%20of%20Low%2C%20Moderate%2C%20High%2C%20Critical%2C%20or%20%22Asses%20using%20Common%20Weakness%20Enumarator%20found%20in%20Reference%22_%0D%0A%0D%0A%0D%0A%23%23%20CVE%20Identifier%20(https%3A%2F%2Fcve.mitre.org%2Fcve%2Fsearch_cve_list.html)%0D%0ANone%0D%0A%0D%0A%0D%0A%23%23%20Description%0D%0A%0D%0A%0D%0A%0D%0A%23%23%20Reproduction%0D%0A_Step-by-step%20instructions%20to%20reproduce%20the%20issue%20%2F%20Proof-of-concept%20%2F%20Any%20special%20configuration%20needed%20to%20reproduce%20%2F%20Exploit%20Code_%0D%0A%0D%0A%0D%0A%0D%0A%23%23%20Impact%0D%0A_What%20kind%20of%20vulnerability%20is%20it%20(Injection%2C%20XSS%2C%20Overflow%2C%20...)%3F%20Who%20is%20impacted%3F_%0D%0A%0D%0A%0D%0A%23%23%23%20Patches%0D%0A_Has%20the%20problem%20been%20patched%3F%20What%20versions%3F_%0D%0A%0D%0A%0D%0A%23%23%23%20Workarounds%0D%0A_Is%20there%20a%20way%20for%20the%20users%20to%20fix%20or%20remediate%20the%20vulnerability%20without%20upgrading%3F_%0D%0A%0D%0A%0D%0A%23%23%23%20References%0D%0A_Are%20there%20any%20links%20the%20developer%20or%20users%20can%20visit%20to%20find%20out%20more%3F_%0D%0A%0D%0A%0D%0A
+
+== Security Policy
+
+=== Supported Versions
+
+// Use this section to tell people about which versions of your project are
+// currently being supported with security updates.
+
+The current major version is supported.
+*For example* if the current version is 3.4.1:
+
+[options="header",]
+|===
+|Version| Supported
+| v3.4.1 | :white_check_mark:
+| v3.4.x | :white_check_mark:
+| v3.x.x | :white_check_mark:
+| v2.0.0 | :x:
+| v1.0.0 | :x:
+// |< v1.x |:x:
+|===
+
+=== Reporting a Vulnerability
+
+// Use this section to tell people how to report a vulnerability.
+// Tell them where to go, how often they can expect to get an update on a
+// reported vulnerability, what to expect if the vulnerability is accepted or declined, etc.
+
+Please report (suspected) security vulnerabilities to
+{mailtolink}[opensource@jonaspammer.at],
+preferably with a proof of concept.
+
+You may use the following template for your e-mail (text in underscores (`_`) is meant for guidance of filling out the form and can be removed):
+----
+## Severity
+_One of Low, Moderate, High, Critical, or "Asses using Common Weakness Enumarator found in Reference"_
+
+
+## CVE Identifier (https://cve.mitre.org/cve/search_cve_list.html)
+None
+
+
+## Description
+
+
+
+## Reproduction
+_Step-by-step instructions to reproduce the issue / Proof-of-concept / Any special configuration needed to reproduce / Exploit Code_
+
+
+
+## Impact
+_What kind of vulnerability is it (Injection, XSS, Overflow, ...)? Who is impacted?_
+
+
+### Patches
+_Has the problem been patched? What versions?_
+
+
+### Workarounds
+_Is there a way for the users to fix or remediate the vulnerability without upgrading?_
+
+
+### References
+_Are there any links the developer or users can visit to find out more?_
+
+
+----
+
+Non-vulnerability related security issues such as new great new ideas for security features are welcome on GitHub Issues.

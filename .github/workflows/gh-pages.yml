@@ -1,17 +1,21 @@
 ---
 name: build self-contained README
-permissions:
-  pages: write
-  contents: write
+
 "on":
   push:
+
+permissions:
+  contents: read
 
 jobs:
   gh-pages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
     steps:
       - name: check out the codebase
-        uses: actions/checkout@v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
 
       - name: setup ruby
         uses: ruby/setup-ruby@v1
@@ -25,7 +29,7 @@ jobs:
         run: asciidoctor-reducer README.orig.adoc -o README.adoc
 
       - name: Commit generated README.
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@49620cd3ed21ee620a48530e81dba0d139c9cb80 # tag=v4
         with:
           commit_message: "${{ github.event.head_commit.message }}  \n as per ${{ github.sha }}"
           file_pattern: README.adoc
@@ -35,7 +39,7 @@ jobs:
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
 
       - name: Deploy to GitHub Pages (when branch is master)
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305 # tag=v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
