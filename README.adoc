@@ -6,6 +6,7 @@ Jonas Pammer <opensource@jonaspammer.at>;
 :source-highlighter: rouge
 
 
+https://galaxy.ansible.com/jonaspammer/openssl[image:https://img.shields.io/badge/available%20on%20ansible%20galaxy-jonaspammer.openssl-brightgreen[Version on Galaxy]]
 // Very Relevant Status Badges
 https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml[image:https://github.com/JonasPammer/ansible-role-openssl/actions/workflows/ci.yml/badge.svg[Testing CI]]
 
@@ -43,7 +44,7 @@ galaxy_info:
   description: "An ansible role for generating OpenSSL Certificate Files."
 
   author: "jonaspammer"
-  license: MIT
+  license: "MIT"
 
   min_ansible_version: "2.11"
   platforms:
@@ -884,7 +885,7 @@ Please report any accidental breaking changes of a minor version update.
 ----
 MIT License
 
-Copyright (c) 2022 Jonas Pammer
+Copyright (c) 2022, Jonas Pammer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
