@@ -710,6 +710,7 @@ if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
 </ul>
 </li>
 <li><a href="#public_vars">📜 Facts/Variables defined by this role</a></li>
+<li><a href="#tags">🏷️ Tags</a></li>
 <li><a href="#dependencies">👫 Dependencies</a></li>
 <li><a href="#example_playbooks">📚 Example Playbook Usages</a></li>
 <li><a href="#development">📝 Development</a>
@@ -1196,6 +1197,35 @@ As per <a href="https://serverfault.com/a/722646" class="bare">https://serverfau
 </div>
 </div>
 <div class="sect1">
+<h2 id="tags">🏷️ Tags</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tasks are tagged with the following
+<a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_tags.html#adding-tags-to-roles">tags</a>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">This role does not have officially documented tags yet.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>You can use Ansible to skip tasks, or only run certain tasks by using these tags. By default, all tasks are run when no tags are specified.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="dependencies">👫 Dependencies</h2>
 <div class="sectionbody">
 
@@ -1251,19 +1281,19 @@ as well as the recursive tree of their soft dependencies.</p>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>roles:
-  - jonaspammer.openssl
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">roles</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jonaspammer.openssl</span>
 
-vars:
-  - filename: common_jonaspammer_at
-    csr_common_name: common.jonaspammer.at
-    csr_country_name: "AT"
-    csr_state_or_province_name: "Vorarlberg"
-    csr_locality_name: "Bregenz"
-    csr_email_address: "opensource@jonaspammer.at"
+<span class="na">vars</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">filename</span><span class="pi">:</span> <span class="s">common_jonaspammer_at</span>
+    <span class="na">csr_common_name</span><span class="pi">:</span> <span class="s">common.jonaspammer.at</span>
+    <span class="na">csr_country_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">AT"</span>
+    <span class="na">csr_state_or_province_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Vorarlberg"</span>
+    <span class="na">csr_locality_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Bregenz"</span>
+    <span class="na">csr_email_address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">opensource@jonaspammer.at"</span>
 
-    privatekey_backup: true
-    install_ca_to_system: true</pre>
+    <span class="na">privatekey_backup</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">install_ca_to_system</span><span class="pi">:</span> <span class="no">true</span></code></pre>
 </div>
 </div>
 </div>
@@ -1918,7 +1948,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-27 15:26:04 UTC
+Last updated 2022-08-28 19:32:56 UTC
 </div>
 </div>
 </body>
