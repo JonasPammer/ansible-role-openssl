@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/JonasPammer/cookiecutter-ansible-role.git",
-  "commit": "30d961a7e6188f66a146fbc0b4fb8cd1f4784f29",
+  "commit": "83d931f9702db2b28b52fccc89f3ef0c683e1b69",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -8,12 +8,14 @@
       "email": "opensource@jonaspammer.at",
       "code_of_conduct_enforcement_contact_email": "opensource@jonaspammer.at",
       "github_username": "JonasPammer",
-      "open_source_license": ["MIT License", "MIT"],
+      "open_source_license": [
+        "MIT License",
+        "MIT"
+      ],
       "galaxy_name": "jonaspammer",
       "min_ansible_version": "2.11",
       "allow_duplicates": "no",
       "ansible_user_needs_to_become": "True",
-      "role_name_": "openssl",
       "role_name": "openssl",
       "project_slug": "ansible-role-openssl",
       "project_short_purpose": "generating OpenSSL Certificate Files",
