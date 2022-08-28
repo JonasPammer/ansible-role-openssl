@@ -380,6 +380,34 @@ As per https://serverfault.com/a/722646
 ****
 
 
+[[tags]]
+== 🏷️ Tags
+
+// Checkout https://github.com/tribe29/ansible-collection-tribe29.checkmk/blob/main/roles/server/README.md#tags
+// for an awesome example of grouping tasks using tags
+
+Tasks are tagged with the following
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_tags.html#adding-tags-to-roles[tags]:
+
+[cols="1,1"]
+|===
+|Tag | Purpose
+
+2+| This role does not have officially documented tags yet.
+
+// | download-xyz
+// |
+// | install-prerequisites
+// |
+// | install
+// |
+// | create-xyz
+// |
+|===
+
+You can use Ansible to skip tasks, or only run certain tasks by using these tags. By default, all tasks are run when no tags are specified.
+
+
 [[dependencies]]
 == 👫 Dependencies
 // A list of other roles should go here,
@@ -425,6 +453,7 @@ requirements.yml dependency graph of jonaspammer.openssl]
 
 .Common Play / OpenSSL Item
 ====
+[source,yaml]
 ----
 roles:
   - jonaspammer.openssl
