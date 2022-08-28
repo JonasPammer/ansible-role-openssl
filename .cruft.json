@@ -8,10 +8,7 @@
       "email": "opensource@jonaspammer.at",
       "code_of_conduct_enforcement_contact_email": "opensource@jonaspammer.at",
       "github_username": "JonasPammer",
-      "open_source_license": [
-        "MIT License",
-        "MIT"
-      ],
+      "open_source_license": ["MIT License", "MIT"],
       "galaxy_name": "jonaspammer",
       "min_ansible_version": "2.11",
       "allow_duplicates": "no",
