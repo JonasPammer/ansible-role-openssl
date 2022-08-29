@@ -1,5 +1,5 @@
 ---
-name: build self-contained README
+name: build self-contained READMEs
 
 "on":
   push:
@@ -22,23 +22,47 @@ jobs:
         with:
           ruby-version: "2.7.0"
 
-      - name: install asciidoctor
+      - name: set up python 3
+        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5 # tag=v4
+        with:
+          python-version: "3.x"
+
+      - name: setup/activate pre-commit cache
+        uses: actions/cache@f4278025ab0f432ce369118909e46deec636f50c # tag=v3
+        with:
+          path: ~/.cache/pre-commit
+          key: "${{ hashFiles('.pre-commit-config.yaml') }}"
+
+      - name: install asciidoctor and other relevant ruby gems
         run: gem install --no-document asciidoctor asciidoctor-reducer rouge coderay
 
       - name: Generate README.adoc using ascidoctor-reducer.
         run: asciidoctor-reducer README.orig.adoc -o README.adoc
 
+      - name: generate README.xml from README.adoc using ascidoctor
+        run: asciidoctor -b docbook README.adoc
+
+      - name: Generate README.md from README.xml using pandoc
+        uses: docker://pandoc/core@sha256:65d98a5fb89867961479c16f4597134517923661aca23ef63843f6b6e623508b
+        with:
+          args: "-f docbook -t markdown_strict README.xml -o README.md --wrap=none"
+
+      - name: pre-commit README.md
+        run: |
+          python3 -m pip install pre-commit
+          pre-commit run --files README.md || true
+
       - name: Commit generated README.
         uses: stefanzweifel/git-auto-commit-action@49620cd3ed21ee620a48530e81dba0d139c9cb80 # tag=v4
         with:
           commit_message: "${{ github.event.head_commit.message }}  \n as per ${{ github.sha }}"
-          file_pattern: README.adoc
+          file_pattern: README.adoc README.md
           disable_globbing: true
 
       - name: Generate HTML
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
 
-      - name: Deploy to GitHub Pages (when branch is master)
+      - name: Deploy HTML to GitHub Pages (when branch is master)
         uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305 # tag=v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
