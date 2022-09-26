@@ -31,10 +31,11 @@ name: CI (Lint + Molecule)
         type: choice
         default: "ansible-5,ansible-4"
         options:
-          - ansible-5,ansible-4
+          - ansible-4,ansible-5,ansible-6
           - ansible-4,ansible-5
           - ansible-4
           - ansible-5
+          - ansible-6
   pull_request:
   push:
     branches:
@@ -112,7 +113,7 @@ jobs:
             contains(matrix.distro, github.event.inputs.distro)) }}
 
     steps:
-      - name: If this step is not skipped, this is a FAKE ci run.
+      - name: if this step is run, this is a real ci run
         run: >
           cat << EOF
             If this step is NOT skipped, this workflow run was manually dispatched
@@ -120,7 +121,7 @@ jobs:
             This is a hack because GitHub CI does not allow for a state other than "failed"
             as per https://github.com/actions/runner/issues/662
           EOF
-        if: env.WORKFLOW_DISPATCH_IF == 'false'
+        if: github.event_name != 'workflow_dispatch' || env.WORKFLOW_DISPATCH_IF == 'true'
 
       - name: check out the codebase
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
@@ -145,7 +146,7 @@ jobs:
           TOX_SKIP_ENV: pre-commit
           TOX_PARALLEL_NO_SPINNER: 1
           MOLECULE_DISTRO: ${{ matrix.distro }}
-        if: ${{ github.event_name != 'workflow_dispatch' }}
+        if: github.event_name != 'workflow_dispatch'
 
       - name: Run Molecule tests (debug).
         run: tox

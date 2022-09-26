@@ -1,3 +1,7 @@
 ---
 exclude_paths:
   - ./molecule/resources/*
+
+# https://github.com/JonasPammer/cookiecutter-ansible-role/blob/master/ROLE_DEVELOPMENT_GUIDELINES.adoc#naming-tasks
+skip_list:
+  - name
