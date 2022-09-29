@@ -2,7 +2,8 @@
 # tasks file for testing that variables of ansible-role jonaspammer.openssl are set correctly
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_tests.html
 
-- block:
+- when: openssl_items is defined
+  block:
     - name: test if 'openssl_items' is a list
       ansible.builtin.assert:
         that:
@@ -15,8 +16,6 @@
           - item.csr_common_name is defined
         quiet: true
       loop: "{{ openssl_items }}"
-  when:
-    - openssl_items is defined
 
 - name: test if 'openssl_key_directory' is set correctly
   ansible.builtin.assert:

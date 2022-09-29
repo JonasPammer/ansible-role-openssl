@@ -170,7 +170,8 @@
     mode: u=rw,g=r,o=
 
 # as described https://ubuntu.com/server/docs/security-trust-store
-- block:
+- when: item.install_ca_to_system | default(false) and ansible_os_family == 'Debian'
+  block:
     - name: Create symlink of Self Signed OpenSSL certificate to '/usr/local/share/ca-certificates/…' (Debian).
       become: true
       ansible.builtin.file:
@@ -189,9 +190,9 @@
           {{ '--fresh' if item.install_ca_to_system_fresh | default(item.default_force | default(false)) }}
       changed_when: false
       notify: restart httpd
-  when: item.install_ca_to_system | default(false) and ansible_os_family == 'Debian'
 
-- block:
+- when: item.install_ca_to_system | default(false) and ansible_os_family == 'RedHat'
+  block:
     - name: Install 'ca-certificates' package (RHEL).
       ansible.builtin.package:
         name: ca-certificates
@@ -239,4 +240,3 @@
         dest: "{{ openssl_crt_directory }}/{{ openssl__register_command_openssl_hash_of_cert.stdout }}.0"
         state: link
       notify: restart httpd
-  when: item.install_ca_to_system | default(false) and ansible_os_family == 'RedHat'
