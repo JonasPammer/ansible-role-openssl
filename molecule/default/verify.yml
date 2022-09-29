@@ -83,7 +83,7 @@
         var: openssl__register_x509certificateinfo
 
     - name: Validate that certificate is valid tomorrow, but not in three weeks
-      assert:
+      ansible.builtin.assert:
         that:
           - openssl__register_x509certificateinfo.valid_at.point_1
           - not openssl__register_x509certificateinfo.valid_at.point_2
