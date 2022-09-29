@@ -6,7 +6,7 @@
     path: "{{ openssl_key_directory }}/{{ item.filename }}.key"
     mode: u=rw,g=,o=
     backup: "{{ item.privatekey_backup | default(item.default_backup | default(omit)) }}"
-    cipher: "{{ item.privatekey_cipher | default('auto' if item.privatekey_passphrase|default(false) else omit) }}"
+    cipher: "{{ item.privatekey_cipher | default('auto' if item.privatekey_passphrase | default(false) else omit) }}"
     curve: "{{ item.privatekey_curve | default(omit) }}"
     group: "{{ item.privatekey_group | default(item.default_group | default(omit)) }}"
     owner: "{{ item.privatekey_owner | default(item.default_owner | default(omit)) }}"
