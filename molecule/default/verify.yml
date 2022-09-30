@@ -29,7 +29,7 @@
         install_ca_to_system: true
 
   roles:
-    - role: "ansible-role-openssl" # actually needed for vars only
+    - name: "ansible-role-openssl" # actually needed for vars only
 
   tasks:
     ## Simple Certificate Checks ##
