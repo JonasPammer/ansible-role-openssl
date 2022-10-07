@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-focal@sha256:9caa624f20880d2ee792550ea3fbbb2fa9831060d4292e793682c83fc9592747
+FROM mcr.microsoft.com/vscode/devcontainers/base:0-focal@sha256:85df1a70ecf475cef76714b04c4f70ca065c33f63e18ddf78032811f1b0deb0e
 
 
 ############################################################
