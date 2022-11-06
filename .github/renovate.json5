@@ -1,4 +1,7 @@
 {
+  // renovation handled by cookiecutter and https://github.com/JonasPammer/ansible-roles script
+  enabled: false,
+
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     // explicit version of "config:base" from https://docs.renovatebot.com/presets-config
@@ -30,7 +33,6 @@
   lockFileMaintenance: { enabled: true },
   stabilityDays: 7,
 
-  labels: ["kind/dependencies"],
   packageRules: [
     {
       matchPackagePatterns: ["eslint"],
@@ -44,6 +46,7 @@
   vulnerabilityAlerts: {
     labels: ["kind/dependencies", "kind/security"],
   },
+  labels: ["kind/dependencies"],
   rebaseLabel: "renovate/rebase",
   stopUpdatingLabel: "renovate/stop-updating",
 }
