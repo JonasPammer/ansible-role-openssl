@@ -53,20 +53,27 @@ jobs:
           pre-commit run --files README.md || true
           pre-commit run --files README.md || true
 
-      - name: Commit generated README.
-        uses: stefanzweifel/git-auto-commit-action@0b007fbd1180b8e3a3668b21c6517392fe8f26eb # tag=v4
+      - name: get first line of commit message as variable to be used in next step
+        shell: bash
+        run: |
+          echo "FIRST_LINE_OF_HEAD_COMMIT_MESSAGE=${HEAD_COMMIT_MESSAGE}" | head -1 >> $GITHUB_ENV
+        env:
+          HEAD_COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
+
+      - name: Commit generated READMEs.
+        uses: stefanzweifel/git-auto-commit-action@49620cd3ed21ee620a48530e81dba0d139c9cb80 # tag=v4
         with:
-          commit_message: "${{ github.event.head_commit.message }}  \n as per ${{ github.sha }}"
+          commit_message: "${{ env.FIRST_LINE_OF_HEAD_COMMIT_MESSAGE }}\n${{ github.sha }}"
           file_pattern: README.adoc README.md
           disable_globbing: true
 
       - name: Generate HTML
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
 
-      - name: Deploy HTML to GitHub Pages (when branch is master)
-        uses: peaceiris/actions-gh-pages@de7ea6f8efb354206b205ef54722213d99067935 # tag=v3
+      - name: Deploy HTML to GitHub Pages (when branch is master).
+        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305 # tag=v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
           publish_branch: gh-pages
           publish_dir: ./docs/
         if: github.ref == 'refs/heads/master'
