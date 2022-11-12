@@ -28,7 +28,7 @@ jobs:
           python-version: "3.x"
 
       - name: setup/activate pre-commit cache
-        uses: actions/cache@1c73980b09e7aea7201f325a7aa3ad00beddcdda # tag=v3
+        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7 # v3
         with:
           path: ~/.cache/pre-commit
           key: "${{ hashFiles('.pre-commit-config.yaml') }}"
