@@ -1,6 +1,5 @@
 {
-  // renovation handled by cookiecutter and https://github.com/JonasPammer/ansible-roles script
-  enabled: false,
+  enabled: true,
 
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
