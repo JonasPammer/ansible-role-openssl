@@ -1,45 +1,29 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.224.3/containers/docker-in-docker
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-in-docker
 {
-  "name": "ansible-role-dind-JonasPammer-openssl",
-  "dockerFile": "Dockerfile",
-  "runArgs": ["--init", "--privileged"],
-  "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
-  "overrideCommand": false,
-
-  // Set *default* container specific settings.json values on container create.
-  "settings": {},
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    // ## General / GUI ##
-    "eamodio.gitlens",
-    "donjayamanne.githistory",
-    "mhutchie.git-graph",
-    "Gruntfuggly.todo-tree",
-    "aaron-bond.better-comments",
-    "asciidoctor.asciidoctor-vscode",
-    "ms-azuretools.vscode-docker",
-    "mutantdino.resourcemonitor",
-
-    // ## Ansible Development ##
-    "redhat.ansible",
-    "redhat.vscode-yaml",
-    "wholroyd.jinja",
-    "samuelcolvin.jinjahtml"
-  ],
-
+  "name": "ansible-role-dind",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "enableNonRootDocker": "true"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/git-lfs:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
-
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "/bin/bash -ic 'source /home/vscode/postCreateCommand.sh'",
-
-  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "vscode",
-  // All available 'features': https://github.com/microsoft/vscode-dev-containers/tree/main/script-library/docs
-  "features": {
-    "git": "os-provided",
-    "git-lfs": "latest",
-    "github-cli": "latest"
-  }
+  "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh"
+  // Configure tool-specific properties.
+  // "customizations": {},
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }

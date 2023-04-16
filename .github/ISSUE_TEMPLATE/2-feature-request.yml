@@ -22,6 +22,6 @@ body:
     id: extra
     attributes:
       label: Additional context
-      description:
+      description: ""
     validations:
       required: false

@@ -1,7 +1,6 @@
 {
-  enabled: true,
-
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  enabled: true,
   extends: [
     // explicit version of "config:base" from https://docs.renovatebot.com/presets-config
     ":dependencyDashboard",

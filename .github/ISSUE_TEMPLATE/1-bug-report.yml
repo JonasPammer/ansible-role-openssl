@@ -34,8 +34,8 @@ body:
           name: Role Test
 
           roles:
-            - openssl
-      render: yaml
+            - role: openssl
+      render: YAML
     validations:
       required: true
   - type: input
@@ -73,7 +73,7 @@ body:
           python version = 3.8.10 (default, Nov 26 2021, 20:14:08) [GCC 9.3.0]
           jinja version = 3.0.1
           libyaml = True
-      render: shell
+      render: Shell
     validations:
       required: true
   - type: textarea
@@ -91,6 +91,6 @@ body:
         ubuntu@srvweb2:~$ cat /etc/os-release
         NAME="Debian"
         …(output trimmed for placeholder only)
-      render: shell
+      render: Shell
     validations:
       required: true

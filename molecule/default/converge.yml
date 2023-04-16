@@ -19,4 +19,4 @@
         install_ca_to_system: true
 
   roles:
-    - name: "ansible-role-openssl"
+    - role: "ansible-role-openssl"

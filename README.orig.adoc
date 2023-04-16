@@ -543,6 +543,79 @@ root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl req -noout -modulus -in
 ----
 ====
 
+
+[[tested-distributions]]
+== 🧪 Tested Distributions
+
+A role may work on different *distributions*, like Red Hat Enterprise Linux (RHEL),
+even though there is no test for this exact distribution.
+
+|===
+| OS Family | Distribution | Distribution Release Date | Distribution End of Life | Accompanying Docker Image
+
+| RedHat
+| CentOS 7
+| 2014-07
+| 2024-06
+| https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master[CI]]
+(https://github.com/geerlingguy/docker-centos7-ansible/issues/18[*,title="CentOS 7 is old"])
+
+| Rocky
+| Rocky Linux 8 (https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/[RHEL/CentOS 8 in disguise])
+| 2021-06
+| 2029-05
+| https://github.com/geerlingguy/docker-rockylinux8-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-rockylinux8-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| RedHat
+| Fedora 35
+| 2021-11
+| 2022-11
+| https://github.com/geerlingguy/docker-fedora35-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora35-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 1604
+| 2016-04
+| 2026-04
+| https://github.com/geerlingguy/docker-ubuntu1604-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu1604-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 1804
+| 2018-04
+| 2028-04
+| https://github.com/geerlingguy/docker-ubuntu1804-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu1804-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 2004
+| 2021-09
+| 2030-04
+| https://github.com/geerlingguy/docker-ubuntu2004-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu2004-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Debian 10
+| 2019-07
+| 2022-08
+| https://github.com/geerlingguy/docker-debian10-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-debian10-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Debian 11
+| 2021-08
+| ?
+| https://github.com/geerlingguy/docker-debian11-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-debian11-ansible/workflows/Build/badge.svg?branch=master[CI]]
+|===
+
+
+[[tested-ansible-versions]]
+== 🧪 Tested Ansible versions
+
+The tested ansible versions try to stay equivalent with the
+https://github.com/ansible-collections/community.general#tested-with-ansible[
+support pattern of Ansible's `community.general` collection].
+As of writing this is:
+
+* 2.11 (Ansible 4)
+* 2.12 (Ansible 5)
+
+
 [[development]]
 == 📝 Development
 // Badges about Conventions in this Project
