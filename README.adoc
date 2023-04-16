@@ -440,9 +440,9 @@ which sources its soft dependencies from `requirements.yml`:
   gather_facts: false
 
   roles:
-    - name: jonaspammer.bootstrap
-    - name: jonaspammer.pip
-    #    - name: jonaspammer.core_dependencies
+    - role: jonaspammer.bootstrap
+    - role: jonaspammer.pip
+    #    - role: jonaspammer.core_dependencies
 ----
 
 The following diagram is a compilation of the "soft dependencies" of this role
@@ -583,6 +583,79 @@ root@instance-py3-ansible-5-ubuntu1604:/etc/ssl# openssl req -noout -modulus -in
 ----
 ====
 
+
+[[tested-distributions]]
+== 🧪 Tested Distributions
+
+A role may work on different *distributions*, like Red Hat Enterprise Linux (RHEL),
+even though there is no test for this exact distribution.
+
+|===
+| OS Family | Distribution | Distribution Release Date | Distribution End of Life | Accompanying Docker Image
+
+| RedHat
+| CentOS 7
+| 2014-07
+| 2024-06
+| https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master[CI]]
+(https://github.com/geerlingguy/docker-centos7-ansible/issues/18[*,title="CentOS 7 is old"])
+
+| Rocky
+| Rocky Linux 8 (https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/[RHEL/CentOS 8 in disguise])
+| 2021-06
+| 2029-05
+| https://github.com/geerlingguy/docker-rockylinux8-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-rockylinux8-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| RedHat
+| Fedora 35
+| 2021-11
+| 2022-11
+| https://github.com/geerlingguy/docker-fedora35-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora35-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 1604
+| 2016-04
+| 2026-04
+| https://github.com/geerlingguy/docker-ubuntu1604-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu1604-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 1804
+| 2018-04
+| 2028-04
+| https://github.com/geerlingguy/docker-ubuntu1804-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu1804-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 2004
+| 2021-09
+| 2030-04
+| https://github.com/geerlingguy/docker-ubuntu2004-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu2004-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Debian 10
+| 2019-07
+| 2022-08
+| https://github.com/geerlingguy/docker-debian10-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-debian10-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Debian 11
+| 2021-08
+| ?
+| https://github.com/geerlingguy/docker-debian11-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-debian11-ansible/workflows/Build/badge.svg?branch=master[CI]]
+|===
+
+
+[[tested-ansible-versions]]
+== 🧪 Tested Ansible versions
+
+The tested ansible versions try to stay equivalent with the
+https://github.com/ansible-collections/community.general#tested-with-ansible[
+support pattern of Ansible's `community.general` collection].
+As of writing this is:
+
+* 2.11 (Ansible 4)
+* 2.12 (Ansible 5)
+
+
 [[development]]
 == 📝 Development
 // Badges about Conventions in this Project
@@ -593,7 +666,7 @@ https://results.pre-commit.ci/latest/github/JonasPammer/ansible-role-openssl/mas
 [[development-system-dependencies]]
 === 📌 Development Machine Dependencies
 
-* Python 3.8 or greater
+* Python 3.9 or greater
 * Docker
 
 [[development-dependencies]]
@@ -638,10 +711,9 @@ takes care of importing the role to my Ansible Galaxy Account.
 === 🧪 Testing
 Automatic Tests are run on each Contribution using GitHub Workflows.
 
-The Tests primarily resolve around running
-https://molecule.readthedocs.io/en/latest/[Molecule]
-on a varying set of linux distributions and using various ansible versions,
-as detailed in https://github.com/JonasPammer/ansible-roles[JonasPammer/ansible-roles].
+The Tests primarily resolve around running https://molecule.readthedocs.io/en/latest/[Molecule]
+on a <<tested-distributions,varying set of linux distributions>>
+and using <<tested-ansible-versions,various ansible versions>>.
 
 The molecule test also includes a step which lints all ansible playbooks using
 https://github.com/ansible/ansible-lint#readme[`ansible-lint`]
@@ -711,6 +783,7 @@ You may also want to know that the files mentioned in the admonition above
 are attached to the *GitHub CI Artifacts* of a given Workflow run. +
 This allows one to check the difference between runs
 and thus help in debugging what caused the bit-rot or failure in general.
+
 image::https://user-images.githubusercontent.com/32995541/178442403-e15264ca-433a-4bc7-95db-cfadb573db3c.png[]
 =====
 
@@ -733,7 +806,7 @@ $ *docker container prune*
 
 This Project offers a definition for a "1-Click Containerized Development Environment".
 
-This Container even allow one to run docker containers inside of them (Docker-In-Docker, dind),
+This Container even enables one to run docker containers inside of it (Docker-In-Docker, dind),
 allowing for molecule execution.
 
 To use it:
@@ -757,9 +830,9 @@ changes made to its definition properly some times.
 
 [NOTE]
 =====
-You may need to configure your host system to enable the container to use your SSH Keys.
+You may need to configure your host system to enable the container to use your SSH/GPG Keys.
 
-The procedure is described https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container[
+The procedure is described https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials[
 in the official devcontainer docs under "Sharing Git credentials with your container"].
 =====
 
