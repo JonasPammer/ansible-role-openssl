@@ -135,6 +135,15 @@ _or_
 $ *docker container prune*
 ----
 
+==== 🐛 Debugging installed package versions locally
+
+Although a standard feature in tox 3, this https://github.com/tox-dev/tox/pull/2794[now] only happens when tox recognizes the presence of a CI variable.
+For example:
+
+----
+$ CI=true tox
+----
+
 
 [[development-container-extra]]
 === 🧃 TIP: Containerized Ideal Development Environment

@@ -138,7 +138,7 @@ jobs:
           key: ${{ hashFiles('**/.pre-commit-config.yaml') }}
 
       - name: Install test dependencies.
-        run: pip3 install tox~=3.24.5
+        run: pip3 install -r requirements-dev.txt
 
       - name: Run Molecule tests (normal).
         run: tox

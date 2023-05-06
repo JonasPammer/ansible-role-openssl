@@ -15,15 +15,44 @@
     "ghcr.io/devcontainers/features/git-lfs:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
+      "version": "3.9"
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh"
+  "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // ## General / GUI ##
+        "eamodio.gitlens",
+        "donjayamanne.githistory",
+        "mhutchie.git-graph",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.vscode-github-actions",
+        "GitHub.github-vscode-theme",
+        "vscode-icons-team.vscode-icons",
+        "bierner.markdown-preview-github-styles",
+        "mutantdino.resourcemonitor",
+        "aaron-bond.better-comments",
+        "Gruntfuggly.todo-tree",
+        "muuvmuuv.vscode-sundial",
+        "WakaTime.vscode-wakatime",
+        "asciidoctor.asciidoctor-vscode",
+        "christian-kohler.path-intellisense",
+        "EditorConfig.EditorConfig",
+
+        // ## Ansible Development ##
+        "donjayamanne.python-extension-pack",
+        "redhat.ansible",
+        "redhat.vscode-yaml",
+        "samuelcolvin.jinjahtml",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
