@@ -97,14 +97,17 @@ jobs:
       matrix:
         distro:
           - centos7
-          - centos8
           - debian10
           - debian11
           - fedora35
+          - fedora36
+          - fedora37
+          - fedora38
           - rockylinux8
-          - ubuntu1604
+          - rockylinux9
           - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
 
     env:
       WORKFLOW_DISPATCH_IF: >-
