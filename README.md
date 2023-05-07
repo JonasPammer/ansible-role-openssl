@@ -381,11 +381,39 @@ A role may work on different **distributions**, like Red Hat Enterprise Linux (R
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-rockylinux8-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-rockylinux8-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><p>Rocky</p></td>
+<td style="text-align: left;"><p>Rocky Linux 9</p></td>
+<td style="text-align: left;"><p>2022-07</p></td>
+<td style="text-align: left;"><p>2032-05</p></td>
+<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-rockylinux9-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-rockylinux9-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><p>RedHat</p></td>
 <td style="text-align: left;"><p>Fedora 35</p></td>
 <td style="text-align: left;"><p>2021-11</p></td>
 <td style="text-align: left;"><p>2022-11</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora35-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora35-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p>RedHat</p></td>
+<td style="text-align: left;"><p>Fedora 36</p></td>
+<td style="text-align: left;"><p>2022-05</p></td>
+<td style="text-align: left;"><p>2023-05</p></td>
+<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora36-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora36-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p>RedHat</p></td>
+<td style="text-align: left;"><p>Fedora 37</p></td>
+<td style="text-align: left;"><p>2022-11</p></td>
+<td style="text-align: left;"><p>2023-12</p></td>
+<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora37-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora37-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p>RedHat</p></td>
+<td style="text-align: left;"><p>Fedora 38</p></td>
+<td style="text-align: left;"><p>2023-03</p></td>
+<td style="text-align: left;"><p>2024-05</p></td>
+<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora38-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora38-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
@@ -404,22 +432,29 @@ A role may work on different **distributions**, like Red Hat Enterprise Linux (R
 <tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Ubuntu 2004</p></td>
-<td style="text-align: left;"><p>2021-09</p></td>
+<td style="text-align: left;"><p>2021-04</p></td>
 <td style="text-align: left;"><p>2030-04</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu2004-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu2004-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><p>Debian</p></td>
+<td style="text-align: left;"><p>Ubuntu 2204</p></td>
+<td style="text-align: left;"><p>2022-04</p></td>
+<td style="text-align: left;"><p>2032-04</p></td>
+<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu2204-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu2204-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Debian 10</p></td>
 <td style="text-align: left;"><p>2019-07</p></td>
 <td style="text-align: left;"><p>2022-08</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-debian10-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-debian10-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Debian 11</p></td>
 <td style="text-align: left;"><p>2021-08</p></td>
-<td style="text-align: left;"><p>?</p></td>
+<td style="text-align: left;"><p>2024-07~</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-debian11-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-debian11-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
 </tbody>

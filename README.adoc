@@ -607,11 +607,35 @@ even though there is no test for this exact distribution.
 | 2029-05
 | https://github.com/geerlingguy/docker-rockylinux8-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-rockylinux8-ansible/workflows/Build/badge.svg?branch=master[CI]]
 
+| Rocky
+| Rocky Linux 9
+| 2022-07
+| 2032-05
+| https://github.com/geerlingguy/docker-rockylinux9-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-rockylinux9-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
 | RedHat
 | Fedora 35
 | 2021-11
 | 2022-11
 | https://github.com/geerlingguy/docker-fedora35-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora35-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| RedHat
+| Fedora 36
+| 2022-05
+| 2023-05
+| https://github.com/geerlingguy/docker-fedora36-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora36-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| RedHat
+| Fedora 37
+| 2022-11
+| 2023-12
+| https://github.com/geerlingguy/docker-fedora37-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora37-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| RedHat
+| Fedora 38
+| 2023-03
+| 2024-05
+| https://github.com/geerlingguy/docker-fedora38-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-fedora38-ansible/workflows/Build/badge.svg?branch=master[CI]]
 
 | Debian
 | Ubuntu 1604
@@ -627,9 +651,15 @@ even though there is no test for this exact distribution.
 
 | Debian
 | Ubuntu 2004
-| 2021-09
+| 2021-04
 | 2030-04
 | https://github.com/geerlingguy/docker-ubuntu2004-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu2004-ansible/workflows/Build/badge.svg?branch=master[CI]]
+
+| Debian
+| Ubuntu 2204
+| 2022-04
+| 2032-04
+| https://github.com/geerlingguy/docker-ubuntu2204-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-ubuntu2204-ansible/workflows/Build/badge.svg?branch=master[CI]]
 
 | Debian
 | Debian 10
@@ -640,7 +670,7 @@ even though there is no test for this exact distribution.
 | Debian
 | Debian 11
 | 2021-08
-| ?
+| 2024-07~
 | https://github.com/geerlingguy/docker-debian11-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-debian11-ansible/workflows/Build/badge.svg?branch=master[CI]]
 |===
 
