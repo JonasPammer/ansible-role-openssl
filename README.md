@@ -41,22 +41,27 @@ Below you can find information on…
 
       min_ansible_version: "2.11"
       platforms:
+        # note: text after "actively tested: " represent the docker image name
         - name: EL # (Enterprise Linux)
           versions:
-            - "7" # actively tested: centos7
-            - "8" # actively tested: rockylinux8, centos8
+            - "8" # actively tested: rockylinux8
+            - "9" # actively tested: rockylinux9
         - name: Fedora
           versions:
-            - "35"
+            - "35" # actively tested: fedora35
+            - "36" # actively tested: fedora36
+            - "37" # actively tested: fedora37
+            - "38" # actively tested: fedora38
         - name: Debian
           versions:
-            - buster # debian10 (actively tested)
-            - bullseye # debian11 (actively tested)
+            - buster # actively tested: debian10
+            - bullseye # actively tested: debian11
         - name: Ubuntu
           versions:
-            - xenial # ubuntu1604 (actively tested)
-            - bionic # ubuntu1804 (actively tested)
-            - focal # ubuntu2004 (actively tested)
+            - xenial # actively tested: ubuntu1604
+            - bionic # actively tested: ubuntu1804
+            - focal # actively tested: ubuntu2004
+            - jammy # actively tested: ubuntu2204
 
       galaxy_tags:
         - networking
@@ -367,90 +372,83 @@ A role may work on different **distributions**, like Red Hat Enterprise Linux (R
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><p>RedHat</p></td>
-<td style="text-align: left;"><p>CentOS 7</p></td>
-<td style="text-align: left;"><p>2014-07</p></td>
-<td style="text-align: left;"><p>2024-06</p></td>
-<td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a> (<a href="https://github.com/geerlingguy/docker-centos7-ansible/issues/18">*</a>)</p></td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><p>Rocky</p></td>
 <td style="text-align: left;"><p>Rocky Linux 8 (<a href="https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/">RHEL/CentOS 8 in disguise</a>)</p></td>
 <td style="text-align: left;"><p>2021-06</p></td>
 <td style="text-align: left;"><p>2029-05</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-rockylinux8-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-rockylinux8-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>Rocky</p></td>
 <td style="text-align: left;"><p>Rocky Linux 9</p></td>
 <td style="text-align: left;"><p>2022-07</p></td>
 <td style="text-align: left;"><p>2032-05</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-rockylinux9-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-rockylinux9-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>RedHat</p></td>
 <td style="text-align: left;"><p>Fedora 35</p></td>
 <td style="text-align: left;"><p>2021-11</p></td>
 <td style="text-align: left;"><p>2022-11</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora35-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora35-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>RedHat</p></td>
 <td style="text-align: left;"><p>Fedora 36</p></td>
 <td style="text-align: left;"><p>2022-05</p></td>
 <td style="text-align: left;"><p>2023-05</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora36-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora36-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>RedHat</p></td>
 <td style="text-align: left;"><p>Fedora 37</p></td>
 <td style="text-align: left;"><p>2022-11</p></td>
 <td style="text-align: left;"><p>2023-12</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora37-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora37-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>RedHat</p></td>
 <td style="text-align: left;"><p>Fedora 38</p></td>
 <td style="text-align: left;"><p>2023-03</p></td>
 <td style="text-align: left;"><p>2024-05</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-fedora38-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-fedora38-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Ubuntu 1604</p></td>
 <td style="text-align: left;"><p>2016-04</p></td>
 <td style="text-align: left;"><p>2026-04</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu1604-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu1604-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Ubuntu 1804</p></td>
 <td style="text-align: left;"><p>2018-04</p></td>
 <td style="text-align: left;"><p>2028-04</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu1804-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu1804-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Ubuntu 2004</p></td>
 <td style="text-align: left;"><p>2021-04</p></td>
 <td style="text-align: left;"><p>2030-04</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu2004-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu2004-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Ubuntu 2204</p></td>
 <td style="text-align: left;"><p>2022-04</p></td>
 <td style="text-align: left;"><p>2032-04</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-ubuntu2204-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-ubuntu2204-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Debian 10</p></td>
 <td style="text-align: left;"><p>2019-07</p></td>
 <td style="text-align: left;"><p>2022-08</p></td>
 <td style="text-align: left;"><p><a href="https://github.com/geerlingguy/docker-debian10-ansible/actions?query=workflow%3ABuild"><img src="https://github.com/geerlingguy/docker-debian10-ansible/workflows/Build/badge.svg?branch=master" alt="CI" /></a></p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><p>Debian</p></td>
 <td style="text-align: left;"><p>Debian 11</p></td>
 <td style="text-align: left;"><p>2021-08</p></td>
@@ -467,6 +465,8 @@ The tested ansible versions try to stay equivalent with the [ support pattern of
 - 2.11 (Ansible 4)
 
 - 2.12 (Ansible 5)
+
+- 2.13 (Ansible 6)
 
 # 📝 Development
 
@@ -512,7 +512,7 @@ The molecule test also includes a step which lints all ansible playbooks using [
 
 To run the tests, simply run `tox` on the command line. You can pass an optional environment variable to define the distribution of the Docker container that will be spun up by molecule:
 
-    $ MOLECULE_DISTRO=centos7 tox
+    $ MOLECULE_DISTRO=ubuntu2204 tox
 
 For a list of possible values fed to `MOLECULE_DISTRO`, take a look at the matrix defined in [.github/workflows/ci.yml](.github/workflows/ci.yml).
 

@@ -50,22 +50,27 @@ galaxy_info:
 
   min_ansible_version: "2.11"
   platforms:
+    # note: text after "actively tested: " represent the docker image name
     - name: EL # (Enterprise Linux)
       versions:
-        - "7" # actively tested: centos7
-        - "8" # actively tested: rockylinux8, centos8
+        - "8" # actively tested: rockylinux8
+        - "9" # actively tested: rockylinux9
     - name: Fedora
       versions:
-        - "35"
+        - "35" # actively tested: fedora35
+        - "36" # actively tested: fedora36
+        - "37" # actively tested: fedora37
+        - "38" # actively tested: fedora38
     - name: Debian
       versions:
-        - buster # debian10 (actively tested)
-        - bullseye # debian11 (actively tested)
+        - buster # actively tested: debian10
+        - bullseye # actively tested: debian11
     - name: Ubuntu
       versions:
-        - xenial # ubuntu1604 (actively tested)
-        - bionic # ubuntu1804 (actively tested)
-        - focal # ubuntu2004 (actively tested)
+        - xenial # actively tested: ubuntu1604
+        - bionic # actively tested: ubuntu1804
+        - focal # actively tested: ubuntu2004
+        - jammy # actively tested: ubuntu2204
 
   galaxy_tags:
     - networking
@@ -594,13 +599,6 @@ even though there is no test for this exact distribution.
 |===
 | OS Family | Distribution | Distribution Release Date | Distribution End of Life | Accompanying Docker Image
 
-| RedHat
-| CentOS 7
-| 2014-07
-| 2024-06
-| https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master[CI]]
-(https://github.com/geerlingguy/docker-centos7-ansible/issues/18[*,title="CentOS 7 is old"])
-
 | Rocky
 | Rocky Linux 8 (https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/[RHEL/CentOS 8 in disguise])
 | 2021-06
@@ -685,6 +683,7 @@ As of writing this is:
 
 * 2.11 (Ansible 4)
 * 2.12 (Ansible 5)
+* 2.13 (Ansible 6)
 
 
 [[development]]
@@ -755,7 +754,7 @@ You can pass an optional environment variable to define the distribution of the
 Docker container that will be spun up by molecule:
 
 ----
-$ MOLECULE_DISTRO=centos7 tox
+$ MOLECULE_DISTRO=ubuntu2204 tox
 ----
 
 For a list of possible values fed to `MOLECULE_DISTRO`,
