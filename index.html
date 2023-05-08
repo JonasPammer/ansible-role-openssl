@@ -673,22 +673,27 @@ if enabled (see <a href="#install_ca_to_system">[install_ca_to_system]</a>).</p>
 
   <span class="na">min_ansible_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.11"</span>
   <span class="na">platforms</span><span class="pi">:</span>
+    <span class="c1"># note: text after "actively tested: " represent the docker image name</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">EL</span> <span class="c1"># (Enterprise Linux)</span>
       <span class="na">versions</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">7"</span> <span class="c1"># actively tested: centos7</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">8"</span> <span class="c1"># actively tested: rockylinux8, centos8</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">8"</span> <span class="c1"># actively tested: rockylinux8</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">9"</span> <span class="c1"># actively tested: rockylinux9</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Fedora</span>
       <span class="na">versions</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s2">"</span><span class="s">35"</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">35"</span> <span class="c1"># actively tested: fedora35</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">36"</span> <span class="c1"># actively tested: fedora36</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">37"</span> <span class="c1"># actively tested: fedora37</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">38"</span> <span class="c1"># actively tested: fedora38</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Debian</span>
       <span class="na">versions</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">buster</span> <span class="c1"># debian10 (actively tested)</span>
-        <span class="pi">-</span> <span class="s">bullseye</span> <span class="c1"># debian11 (actively tested)</span>
+        <span class="pi">-</span> <span class="s">buster</span> <span class="c1"># actively tested: debian10</span>
+        <span class="pi">-</span> <span class="s">bullseye</span> <span class="c1"># actively tested: debian11</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Ubuntu</span>
       <span class="na">versions</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">xenial</span> <span class="c1"># ubuntu1604 (actively tested)</span>
-        <span class="pi">-</span> <span class="s">bionic</span> <span class="c1"># ubuntu1804 (actively tested)</span>
-        <span class="pi">-</span> <span class="s">focal</span> <span class="c1"># ubuntu2004 (actively tested)</span>
+        <span class="pi">-</span> <span class="s">xenial</span> <span class="c1"># actively tested: ubuntu1604</span>
+        <span class="pi">-</span> <span class="s">bionic</span> <span class="c1"># actively tested: ubuntu1804</span>
+        <span class="pi">-</span> <span class="s">focal</span> <span class="c1"># actively tested: ubuntu2004</span>
+        <span class="pi">-</span> <span class="s">jammy</span> <span class="c1"># actively tested: ubuntu2204</span>
 
   <span class="na">galaxy_tags</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">networking</span>
@@ -1347,14 +1352,6 @@ even though there is no test for this exact distribution.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RedHat</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CentOS 7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2014-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-06</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild"><span class="image"><img src="https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master" alt="CI"></span></a>
-(<a href="https://github.com/geerlingguy/docker-centos7-ansible/issues/18" title="CentOS 7 is old">*</a>)</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Rocky</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Rocky Linux 8 (<a href="https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/">RHEL/CentOS 8 in disguise</a>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2021-06</p></td>
@@ -1459,6 +1456,9 @@ As of writing this is:</p>
 <li>
 <p>2.12 (Ansible 5)</p>
 </li>
+<li>
+<p>2.13 (Ansible 6)</p>
+</li>
 </ul>
 </div>
 </div>
@@ -1551,7 +1551,7 @@ Docker container that will be spun up by molecule:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ MOLECULE_DISTRO=centos7 tox</pre>
+<pre>$ MOLECULE_DISTRO=ubuntu2204 tox</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2007,7 +2007,7 @@ SOFTWARE.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-05-07 22:21:23 UTC
+Last updated 2023-05-08 18:22:09 UTC
 </div>
 </div>
 </body>
