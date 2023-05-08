@@ -13,23 +13,25 @@ name: CI (Lint + Molecule)
         description: "Select a Distribution to run"
         required: false
         type: choice
-        default: "ALL"
+        default: "ubuntu2204"
         options:
-          - ALL
-          - centos7
-          - centos8
-          - debian10
-          - debian11
-          - fedora35
-          - rockylinux8
-          - ubuntu1604
           - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
+          - debian10
+          - debian11
+          - rockylinux8
+          - rockylinux9
+          - fedora35
+          - fedora36
+          - fedora37
+          - fedora38
+          - ALL
       ansible_version:
         description: "Select Ansible Versions to run"
         required: false
         type: choice
-        default: "ansible-5,ansible-4"
+        default: "ansible-6"
         options:
           - ansible-4,ansible-5,ansible-6
           - ansible-4,ansible-5
@@ -94,20 +96,21 @@ jobs:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
+      # half length of matrix's distro list:
+      max-parallel: 6
       matrix:
         distro:
-          - centos7
+          - ubuntu1804
+          - ubuntu2004
+          - ubuntu2204
           - debian10
           - debian11
+          - rockylinux8
+          - rockylinux9
           - fedora35
           - fedora36
           - fedora37
           - fedora38
-          - rockylinux8
-          - rockylinux9
-          - ubuntu1804
-          - ubuntu2004
-          - ubuntu2204
 
     env:
       WORKFLOW_DISPATCH_IF: >-

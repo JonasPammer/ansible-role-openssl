@@ -553,13 +553,6 @@ even though there is no test for this exact distribution.
 |===
 | OS Family | Distribution | Distribution Release Date | Distribution End of Life | Accompanying Docker Image
 
-| RedHat
-| CentOS 7
-| 2014-07
-| 2024-06
-| https://github.com/geerlingguy/docker-centos7-ansible/actions?query=workflow%3ABuild[image:https://github.com/geerlingguy/docker-centos7-ansible/workflows/Build/badge.svg?branch=master[CI]]
-(https://github.com/geerlingguy/docker-centos7-ansible/issues/18[*,title="CentOS 7 is old"])
-
 | Rocky
 | Rocky Linux 8 (https://www.howtogeek.com/devops/is-rocky-linux-the-new-centos/[RHEL/CentOS 8 in disguise])
 | 2021-06
@@ -644,6 +637,7 @@ As of writing this is:
 
 * 2.11 (Ansible 4)
 * 2.12 (Ansible 5)
+* 2.13 (Ansible 6)
 
 
 [[development]]

@@ -59,7 +59,7 @@ You can pass an optional environment variable to define the distribution of the
 Docker container that will be spun up by molecule:
 
 ----
-$ MOLECULE_DISTRO=centos7 tox
+$ MOLECULE_DISTRO=ubuntu2204 tox
 ----
 
 For a list of possible values fed to `MOLECULE_DISTRO`,
