@@ -18,13 +18,3 @@
   loop:
     - "{{ inventory_hostname }}"
     - localhost
-
-- name: DEBUG host variables ("hostvars") create /var/tmp/hostvars.yml
-  ansible.builtin.copy:
-    content: "{{ hostvars | to_nice_yaml }}"
-    dest: /var/tmp/hostvars.yml
-  delegate_to: "{{ item }}"
-  ignore_errors: "{{ item == 'localhost' }}"
-  loop:
-    - "{{ inventory_hostname }}"
-    - localhost

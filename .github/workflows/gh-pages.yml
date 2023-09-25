@@ -3,6 +3,8 @@ name: build self-contained READMEs
 
 "on":
   push:
+    branches-ignore:
+      - renovate/**
 
 permissions:
   contents: read
@@ -18,10 +20,14 @@ jobs:
     permissions:
       contents: write
       pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}"
     steps:
       ### Setup
       - name: check out the codebase
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
 
       - name: setup ruby
         uses: ruby/setup-ruby@v1
@@ -29,7 +35,7 @@ jobs:
           ruby-version: "2.7.0"
 
       - name: set up python 3
-        uses: actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0 # v4
+        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4
         with:
           python-version: "3.x"
 
@@ -66,7 +72,7 @@ jobs:
         run: asciidoctor -b docbook SECURITY.adoc
 
       - name: Generate SECURITY.md from SECURITY.xml using pandoc
-        uses: docker://pandoc/core:3.1
+        uses: docker://pandoc/core:3.1@sha256:222badaf55d35aa19a54294721b2669a55737e8a96e78f038b89c2b70bccd13f
         with:
           args: "-f docbook -t markdown_strict SECURITY.xml -o SECURITY.md --wrap=none"
 
@@ -96,11 +102,19 @@ jobs:
       ### Deploy README.adoc
       - name: Generate HTML
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
+        if: github.ref == 'refs/heads/master'
 
-      - name: Deploy HTML to GitHub Pages (when branch is master).
-        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305 # tag=v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        if: github.ref == 'refs/heads/master'
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          publish_branch: gh-pages
-          publish_dir: ./docs/
+          path: "./docs/"
+        if: github.ref == 'refs/heads/master'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
         if: github.ref == 'refs/heads/master'
