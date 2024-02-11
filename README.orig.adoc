@@ -1,6 +1,6 @@
 = ansible-role-openssl
 Jonas Pammer <opensource@jonaspammer.at>;
-:toc:
+:toc: left
 :toclevels: 2
 :toc-placement!:
 :source-highlighter: rouge
