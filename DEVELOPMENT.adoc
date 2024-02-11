@@ -1,7 +1,7 @@
 [[development-system-dependencies]]
 === 📌 Development Machine Dependencies
 
-* Python 3.9 or greater
+* Python 3.10 or greater
 * Docker
 
 [[development-dependencies]]
@@ -74,11 +74,11 @@ take a look at the matrix defined in link:.github/workflows/ci.yml[].
 $ *MOLECULE_DESTROY=never MOLECULE_DISTRO=#ubuntu1604# tox -e py3-ansible-#5#*
 ...
   TASK [ansible-role-pip : (redacted).] pass:[************************]
-  failed: [instance-py3-ansible-5] => changed=false
+  failed: [instance-py3-ansible-9] => changed=false
 ...
  pass:[___________________________________ summary ____________________________________]
   pre-commit: commands succeeded
-ERROR:   py3-ansible-5: commands failed
+ERROR:   py3-ansible-9: commands failed
 ----
 
 2. Find out the name of the molecule-provisioned docker container:
@@ -86,7 +86,7 @@ ERROR:   py3-ansible-5: commands failed
 [subs="quotes"]
 ----
 $ *docker ps*
-#30e9b8d59cdf#   geerlingguy/docker-debian10-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-5
+#30e9b8d59cdf#   geerlingguy/docker-debian10-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-9
 ----
 
 3. Get into a bash Shell of the container, and do your debugging:
@@ -96,9 +96,6 @@ $ *docker ps*
 $ *docker exec -it #30e9b8d59cdf# /bin/bash*
 
 root@instance-py3-ansible-2:/#
-root@instance-py3-ansible-2:/# python3 --version
-Python 3.8.10
-root@instance-py3-ansible-2:/# ...
 ----
 +
 [TIP]
