@@ -462,15 +462,13 @@ A role may work on different **distributions**, like Red Hat Enterprise Linux (R
 
 The tested ansible versions try to stay equivalent with the [ support pattern of Ansible’s `community.general` collection](https://github.com/ansible-collections/community.general#tested-with-ansible). As of writing this is:
 
-- 2.11 (Ansible 4)
-
-- 2.12 (Ansible 5)
-
 - 2.13 (Ansible 6)
 
 - 2.14 (Ansible 7)
 
 - 2.15 (Ansible 8)
+
+- 2.16 (Ansible 9)
 
 # 📝 Development
 
@@ -478,7 +476,7 @@ The tested ansible versions try to stay equivalent with the [ support pattern of
 
 ## 📌 Development Machine Dependencies
 
-- Python 3.9 or greater
+- Python 3.10 or greater
 
 - Docker
 
@@ -527,25 +525,22 @@ For a list of possible values fed to `MOLECULE_DISTRO`, take a look at the matri
         $ MOLECULE_DESTROY=never MOLECULE_DISTRO=ubuntu1604 tox -e py3-ansible-5
         ...
           TASK [ansible-role-pip : (redacted).] ************************
-          failed: [instance-py3-ansible-5] => changed=false
+          failed: [instance-py3-ansible-9] => changed=false
         ...
          ___________________________________ summary ____________________________________
           pre-commit: commands succeeded
-        ERROR:   py3-ansible-5: commands failed
+        ERROR:   py3-ansible-9: commands failed
 
 2.  Find out the name of the molecule-provisioned docker container:
 
         $ docker ps
-        30e9b8d59cdf   geerlingguy/docker-debian10-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-5
+        30e9b8d59cdf   geerlingguy/docker-debian10-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-9
 
 3.  Get into a bash Shell of the container, and do your debugging:
 
         $ docker exec -it 30e9b8d59cdf /bin/bash
 
         root@instance-py3-ansible-2:/#
-        root@instance-py3-ansible-2:/# python3 --version
-        Python 3.8.10
-        root@instance-py3-ansible-2:/# ...
 
     If the failure you try to debug is part of your `verify.yml` step and not the actual `converge.yml`, you may want to know that the output of ansible’s modules (`vars`), hosts (`hostvars`) and environment variables have been stored into files on both the provisioner and inside the docker machine under: \* `/var/tmp/vars.yml` (contains host variables under the `hostvars` key) \* `/var/tmp/environment.yml` `grep`, `cat` or transfer these as you wish!
 
