@@ -12,22 +12,17 @@ galaxy_info:
     # note: text after "actively tested: " represent the docker image name
     - name: EL # (Enterprise Linux)
       versions:
-        - "8" # actively tested: rockylinux8
         - "9" # actively tested: rockylinux9
     - name: Fedora
       versions:
-        - "35" # actively tested: fedora35
-        - "36" # actively tested: fedora36
-        - "37" # actively tested: fedora37
         - "38" # actively tested: fedora38
+        - "39" # actively tested: fedora39
     - name: Debian
       versions:
-        - buster # actively tested: debian10
         - bullseye # actively tested: debian11
+        - bookworm # actively tested: debian12
     - name: Ubuntu
       versions:
-        - xenial # actively tested: ubuntu1604
-        - bionic # actively tested: ubuntu1804
         - focal # actively tested: ubuntu2004
         - jammy # actively tested: ubuntu2204
 

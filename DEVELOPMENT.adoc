@@ -86,7 +86,7 @@ ERROR:   py3-ansible-9: commands failed
 [subs="quotes"]
 ----
 $ *docker ps*
-#30e9b8d59cdf#   geerlingguy/docker-debian10-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-9
+#30e9b8d59cdf#   geerlingguy/docker-debian12-ansible:latest   "/lib/systemd/systemd"   8 minutes ago   Up 8 minutes                                                                                                    instance-py3-ansible-9
 ----
 
 3. Get into a bash Shell of the container, and do your debugging:
