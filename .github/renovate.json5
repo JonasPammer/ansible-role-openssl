@@ -24,6 +24,8 @@
     {
       matchDepTypes: ["action"],
       labels: ["kind/dependencies", "kind/infrastructure"],
+      automerge: true,
+      commitBody: "[skip pre-commit.ci]",
     },
     {
       schedule: ["every 3 months on the first day of the month"],

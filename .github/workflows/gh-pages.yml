@@ -3,8 +3,7 @@ name: build self-contained READMEs
 
 "on":
   push:
-    branches-ignore:
-      - renovate/**
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -30,12 +29,12 @@ jobs:
           ruby-version: "2.7.0"
 
       - name: set up python 3
-        uses: actions/setup-python@65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236 # v4
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5
         with:
           python-version: "3.x"
 
       - name: setup/activate pre-commit cache
-        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4
         with:
           path: ~/.cache/pre-commit
           key: "${{ hashFiles('.pre-commit-config.yaml') }}"
@@ -58,7 +57,7 @@ jobs:
         run: asciidoctor -b docbook README.adoc
 
       - name: Generate README.md from README.xml using pandoc
-        uses: docker://pandoc/core@sha256:d2c4aa0c26e9480b8ab15eb952f49cb6c33ca5635417e1bb064e715a5a32a9e9
+        uses: docker://pandoc/core@sha256:222badaf55d35aa19a54294721b2669a55737e8a96e78f038b89c2b70bccd13f
         with:
           args: "-f docbook -t markdown_strict README.xml -o README.md --wrap=none"
 
@@ -87,20 +86,24 @@ jobs:
           pre-commit run --files README.md SECURITY.md || true
           pre-commit run --files README.md SECURITY.md || true
 
+      - id: is_renovate
+        run: echo "is_renovate=$( [[ ${GITHUB_REF#refs/heads/} != renovate/* ]] && echo false || echo true )" >> $GITHUB_OUTPUT
+
       - name: Commit generated files.
-        uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # v4
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
         with:
           commit_message: "${{ env.FIRST_LINE_OF_HEAD_COMMIT_MESSAGE }}\n${{ github.sha }}"
           file_pattern: README.adoc README.md SECURITY.md
           disable_globbing: true
+        if: steps.is_renovate.outputs.is_renovate == 'false'
 
-      ### (Deploy README.adoc)
+      ### Deploy README.adoc
       - name: Generate HTML
         run: asciidoctor --backend=html5 --destination-dir docs --out-file index.html README.adoc
         if: github.ref == 'refs/heads/master'
 
       - name: upload docs directory for job transfer
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
         with:
           name: docs
           path: ./docs
@@ -114,31 +117,33 @@ jobs:
       contents: read
       pages: write
       id-token: write
+      # delete-artifact@v4
+      actions: write
     environment:
       name: github-pages
       url: "${{ steps.deployment.outputs.page_url }}"
     steps:
       ### Deploy README.adoc
       - name: download docs directory from previous job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@eaceaf801fd36c7dee90939fad912460b18a1ffe # v4
         with:
           name: docs
           path: ./docs
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@1f0c5cde4bc74cd7e1254d0cb4de8d49e9068c7d # v4
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@a753861a5debcf57bf8b404356158c8e1e33150c # v2
         with:
           path: "./docs/"
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@13b55b33dd8996121833dbc1db458c793a334630 # v3
 
       - name: docs artifact no longer needed
-        uses: geekyeggo/delete-artifact@v2
+        uses: geekyeggo/delete-artifact@65041433121f7239077fa20be14c0690f70569de # v4
         with:
           name: docs
           failOnError: false

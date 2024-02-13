@@ -43,21 +43,6 @@ repos:
       - id: yamllint
         args: [-c=.yamllint]
 
-  ## DOCKER ##
-
-  # verifies that docker-compose files are valid by using 'docker-compose config' to parse them
-  - repo: https://github.com/IamTheFij/docker-pre-commit
-    rev: v3.0.1
-    hooks:
-      - id: docker-compose-check
-
-  # Dockerfile linter / best practice checker.
-  # even uses `shellcheck` to check the RUN instructions.
-  - repo: https://github.com/AleksaC/hadolint-py
-    rev: v2.12.0.3
-    hooks:
-      - id: hadolint
-
   ### PYTHON ###
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.15.0
