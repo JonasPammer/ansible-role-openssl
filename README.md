@@ -110,14 +110,14 @@ Name used for every file.
 
 <!-- -->
 
-install_ca_to_system
-_Boolean_. Defaults to `false`.
+install*ca_to_system
+\_Boolean*. Defaults to `false`.
 Whether to execute steps to integrate the self signed certificate to the the System’s CA Trust Store ([sidebar_title](#openssl__system_ca_store_file)).
 
 (Debian/Ubuntu ONLY) Messed up / Fucked up? Try setting `install_ca_to_system_fresh` to `true`.
 
-install_ca_to_system_fresh
-(Debian/Ubuntu ONLY) _Boolean_. Defaults to value of `default_force` (if existent) or `false`.
+install*ca_to_system_fresh
+(Debian/Ubuntu ONLY) \_Boolean*. Defaults to value of `default_force` (if existent) or `false`.
 Invokes `update-ca-certificates` with `--fresh` to remove symlinks in /etc/ssl/certs directory (_before completely resourcing the directory using the configured CA directories and settings_). This thus purges dead / potentially wrong or conflicting certificates.
 
 The below values can be used to set the default parameters of every module where applicable. See the page of any below module for documentation.
@@ -128,7 +128,7 @@ Parameters used to generate OpenSSL private key ('.key') using [openssl_privatek
 
 `path`, `mode` and `unsafe_writes` can not be supplied.
 
-_privatekey_backup_; privatekey_cipher; privatekey_curve; privatekey_group; privatekey_owner; privatekey_passphrase; _privatekey_selevel_; _privatekey_serole_; _privatekey_setype_; _privatekey_seuser_; _privatekey_size_; _privatekey_state_; _privatekey_type_
+_privatekey_backup_; privatekey*cipher; privatekey_curve; privatekey_group; privatekey_owner; privatekey_passphrase; \_privatekey_selevel*; _privatekey_serole_; _privatekey_setype_; _privatekey_seuser_; _privatekey_size_; _privatekey_state_; _privatekey_type_
 
 Parameters used to generate OpenSSL Certificate Signing Request with appropriate subject information ('.csr') using [community.crypto.openssl_csr](https://docs.ansible.com/ansible/2.9/modules/openssl_csr_module.html).
 
@@ -136,7 +136,7 @@ Parameters used to generate OpenSSL Certificate Signing Request with appropriate
 
 This role forces you to supply at-least `csr_common_name`.
 
-csr_authority_cert_issuer; csr_authority_cert_serial_number; csr_authority_key_identifier; _csr_backup_; csr_basic_constraints; csr_basic_constraints_critical; _csr_common_name (Required)_; _csr_country_name_; csr_create_subject_key_identifier; csr_digest; _csr_email_address_; csr_extended_key_usage; csr_extended_key_usage_critical; csr_force; csr_group; csr_key_usage; csr_key_usage_critical; csr_locality_name; csr_ocsp_must_staple; csr_ocsp_must_staple_critical; _csr_organization_name_; csr_organizational_unit_name; csr_owner; _csr_selevel_; _csr_serole_; _csr_setype_; _csr_seuser_; _csr_state_; _csr_state_or_province_name_; csr_subject; csr_subject_alt_name; csr_subject_alt_name_critical; csr_subject_key_identifier; csr_use_common_name_for_san
+csr*authority_cert_issuer; csr_authority_cert_serial_number; csr_authority_key_identifier; \_csr_backup*; csr*basic_constraints; csr_basic_constraints_critical; \_csr_common_name (Required)*; _csr_country_name_; csr*create_subject_key_identifier; csr_digest; \_csr_email_address*; csr*extended_key_usage; csr_extended_key_usage_critical; csr_force; csr_group; csr_key_usage; csr_key_usage_critical; csr_locality_name; csr_ocsp_must_staple; csr_ocsp_must_staple_critical; \_csr_organization_name*; csr*organizational_unit_name; csr_owner; \_csr_selevel*; _csr_serole_; _csr_setype_; _csr_seuser_; _csr_state_; _csr_state_or_province_name_; csr_subject; csr_subject_alt_name; csr_subject_alt_name_critical; csr_subject_key_identifier; csr_use_common_name_for_san
 
 Parameters used to generate Self Signed OpenSSL certificate ('.crt') using [community.crypto.openssl_certificate](https://docs.ansible.com/ansible/2.9/modules/openssl_certificate_module.html).
 
@@ -144,10 +144,10 @@ Parameters used to generate Self Signed OpenSSL certificate ('.crt') using [comm
 
 This role sets `provider` to “selfsigned” by default.
 
-x509cert_acme_accountkey_path; x509cert_acme_chain; x509cert_acme_challenge_path; x509cert_attributes; _x509cert_backup_; x509cert_entrust_api_client_cert_key_path; x509cert_entrust_api_client_cert_path; x509cert_entrust_api_key; x509cert_entrust_api_specification_path; x509cert_entrust_cert_type; x509cert_entrust_not_after; x509cert_entrust_requester_email; x509cert_entrust_requester_name; x509cert_entrust_requester_phone; x509cert_extended_key_usage; x509cert_extended_key_usage_strict; x509cert_force; x509cert_group; x509cert_has_expired; x509cert_invalid_at; x509cert_issuer; x509cert_issuer_strict; x509cert_key_usage; x509cert_key_usage_strict; x509cert_not_after; x509cert_not_before; x509cert_ownca_create_authority_key_identifier; x509cert_ownca_create_subject_key_identifier; x509cert_ownca_digest; x509cert_ownca_not_after; x509cert_ownca_not_before; x509cert_ownca_path; x509cert_ownca_privatekey_passphrase; x509cert_ownca_privatekey_path; x509cert_ownca_version; x509cert_owner; x509cert_provider
+x509cert*acme_accountkey_path; x509cert_acme_chain; x509cert_acme_challenge_path; x509cert_attributes; \_x509cert_backup*; x509cert_entrust_api_client_cert_key_path; x509cert_entrust_api_client_cert_path; x509cert_entrust_api_key; x509cert_entrust_api_specification_path; x509cert_entrust_cert_type; x509cert_entrust_not_after; x509cert_entrust_requester_email; x509cert_entrust_requester_name; x509cert_entrust_requester_phone; x509cert_extended_key_usage; x509cert_extended_key_usage_strict; x509cert_force; x509cert_group; x509cert_has_expired; x509cert_invalid_at; x509cert_issuer; x509cert_issuer_strict; x509cert_key_usage; x509cert_key_usage_strict; x509cert_not_after; x509cert_not_before; x509cert_ownca_create_authority_key_identifier; x509cert_ownca_create_subject_key_identifier; x509cert_ownca_digest; x509cert_ownca_not_after; x509cert_ownca_not_before; x509cert_ownca_path; x509cert_ownca_privatekey_passphrase; x509cert_ownca_privatekey_path; x509cert_ownca_version; x509cert_owner; x509cert_provider
 Defaults to `selfsigned` in this role.
 
-x509cert_select_crypto_backend; _x509cert_selevel_; _x509cert_serole_; _x509cert_setype_; _x509cert_seuser_; x509cert_selfsigned_create_subject_key_identifier; x509cert_selfsigned_digest; _x509cert_selfsigned_not_after_; _x509cert_selfsigned_not_before_; x509cert_selfsigned_version; x509cert_signature_algorithms; _x509cert_state_; x509cert_subject; x509cert_subject_alt_name; x509cert_subject_alt_name_strict; x509cert_subject_strict; x509cert_valid_at; x509cert_valid_in; x509cert_version
+x509cert*select_crypto_backend; \_x509cert_selevel*; _x509cert_serole_; _x509cert_setype_; _x509cert_seuser_; x509cert*selfsigned_create_subject_key_identifier; x509cert_selfsigned_digest; \_x509cert_selfsigned_not_after*; _x509cert_selfsigned_not_before_; x509cert*selfsigned_version; x509cert_signature_algorithms; \_x509cert_state*; x509cert_subject; x509cert_subject_alt_name; x509cert_subject_alt_name_strict; x509cert_subject_strict; x509cert_valid_at; x509cert_valid_in; x509cert_version
 
 Parameters used to generate Self Signed OpenSSL certificate ('.crt') [community.crypto.openssl_pkcs12](https://docs.ansible.com/ansible/latest/collections/community/crypto/openssl_pkcs12_module.html).
 
