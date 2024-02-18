@@ -1,1 +1,5 @@
 .cruft.json
+
+# generated:
+README.md
+SECURITY.md

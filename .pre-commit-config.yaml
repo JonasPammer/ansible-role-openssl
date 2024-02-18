@@ -21,6 +21,11 @@ repos:
       - id: check-xml
       - id: mixed-line-ending
       - id: trailing-whitespace
+        exclude: &generated_pages_exclude | # sync with .prettierignore!
+          (?x)^(
+            README.md|
+            SECURITY.md
+          )$
 
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0
