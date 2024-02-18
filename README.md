@@ -33,7 +33,6 @@ Below you can find information on…
     galaxy_info:
       role_name: "openssl"
       description: "An ansible role for generating OpenSSL Certificate Files."
-      standalone: true
 
       author: "jonaspammer"
       license: "MIT"
