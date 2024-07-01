@@ -60,7 +60,7 @@ jobs:
         run: asciidoctor -b docbook SECURITY.adoc
 
       - name: Generate SECURITY.md from SECURITY.xml using pandoc
-        uses: docker://pandoc/core:3.1@sha256:222badaf55d35aa19a54294721b2669a55737e8a96e78f038b89c2b70bccd13f
+        uses: docker://pandoc/core:3.1@sha256:3cb2db37ef4a5d65bbb511457bd5f42faa48de0a8bebfa1d938896ea1737a4a6
         with:
           args: "-f docbook -t markdown_strict SECURITY.xml -o SECURITY.md --wrap=none"
 
