@@ -92,7 +92,7 @@ jobs:
       - name: set up python 3
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
-          python-version: "3.10"
+          python-version: "3.14"
 
       - name: Install yamllint package.
         run: pip3 install "yamllint==1.*"
@@ -151,7 +151,7 @@ jobs:
       - name: set up python 3
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
-          python-version: "3.10"
+          python-version: "3.14"
 
       - name: setup/activate pre-commit cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
