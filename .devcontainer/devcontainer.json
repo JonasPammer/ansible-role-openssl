@@ -7,16 +7,16 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "enableNonRootDocker": "true",
+      "enableNonRootDocker": "true"
     },
     "ghcr.io/devcontainers/features/git:1": {
-      "version": "latest",
+      "version": "latest"
     },
     "ghcr.io/devcontainers/features/git-lfs:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.12",
-    },
+      "version": "3.12"
+    }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
@@ -49,10 +49,10 @@
         "redhat.ansible",
         "redhat.vscode-yaml",
         "samuelcolvin.jinjahtml",
-        "ms-azuretools.vscode-docker",
-      ],
-    },
-  },
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
